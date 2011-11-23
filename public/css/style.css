@@ -65,3 +65,7 @@ ul#messagelist {
 ul#messagelist li {
   color: red;
 }
+#port {
+  font-size: 200%;
+  text-align: center;
+}
