@@ -43,7 +43,7 @@ process.stdin.resume();
 process.stdin.setEncoding('utf8');
 
 io.sockets.on('connection', function(socket) {
-    socket.emit('narrate', { message: 'Hello!' });
+    socket.emit('narrate', { message: 'Hi there! How can I help?' });
 });
 
 process.stdin.on('data', function (chunk) {

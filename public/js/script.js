@@ -11,7 +11,17 @@ socket.on('message', function(data) {
 });
 
 socket.on('narrate', function(data) {
-    console.log(data);
+	var words = data.message.replace(/ /g, " </span><span>");
+	$("#port").html('<span>'+words+'</span>');
+	
+	var alerts = $("#port span").animate({ opacity: 0 }, 0);
+
+	var currentAlert = 0;
+   	function nextAlert() {
+      	alerts.eq(currentAlert).animate({ opacity: 1, fontSize: "200%" }, 400, nextAlert); 
+      	++currentAlert;
+   	}
+   	nextAlert();/**/
 });
 
 $(document).ready(function() {
