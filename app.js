@@ -39,6 +39,14 @@ app.get('/', routes.index);
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 
-io.sockets.on('connection', function(socket) {
+process.stdin.resume();
+process.stdin.setEncoding('utf8');
 
+io.sockets.on('connection', function(socket) {
 });
+
+process.stdin.on('data', function (chunk) {
+    process.stdout.write('data: ' + chunk);
+    io.sockets.emit('message', { message: chunk });
+});
+
