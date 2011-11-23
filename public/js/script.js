@@ -1,4 +1,5 @@
 var socket = io.connect();
+var face = io.connect("/face");
 
 socket.on('connect', function() {
     console.log('Connected');
@@ -14,28 +15,13 @@ socket.on('narrate', function(data) {
     console.log(data);
 });
 
+face.on('mouth', function(data) {
+    if(data.mouth == 'smile') {
+        $('.mouth').height(20);
+    } else if(data.mouth == 'look') {
+        $('.mouth').height(0);
+    }
+});
+
 $(document).ready(function() {
-    /*
-     * Wolfram Alpha
-     */
-    $('#wolfram').click(function() {
-        var id = '3H76V5-8VKAX7RHXE'; 
-        $.ajax({
-            type: "GET",
-            url: "http://api.wolframalpha.com/v2/query",
-            data: {
-                input:"h2o",
-                format:"html",
-                appid:id
-            },
-            success: function(data) {
-                var xmlDoc = $.parseXML(data);
-                var pod = $(xmlDoc).find("pod");
-                pod.each(function(index) {
-                    console.log(index+': '+$(this));
-                });
-            }
-        });
-        return false;
-    });
 });

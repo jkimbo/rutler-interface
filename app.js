@@ -46,8 +46,19 @@ io.sockets.on('connection', function(socket) {
     socket.emit('narrate', { message: 'Hello!' });
 });
 
+var face = io.of('/face').on('connection', function(socket) {
+});
+
 process.stdin.on('data', function (chunk) {
     //process.stdout.write('data: ' + chunk);
-    io.sockets.emit('message', { message: chunk });
+    try {
+        var input = JSON.parse(chunk);
+        if(input['mouth']) {
+            face.emit('mouth', { mouth: input.mouth });
+        }
+    } catch (err) {
+        console.log('error',err);
+        io.sockets.emit('message', { message: chunk });
+    }
 });
 
