@@ -1,4 +1,4 @@
-var socket = io.connect("http://localhost");
+var socket = io.connect();
 
 socket.on('connect', function() {
     console.log('Connected');
@@ -10,29 +10,32 @@ socket.on('message', function(data) {
     $('#messagelist').append($('<li>').text(data.message));
 });
 
+socket.on('narrate', function(data) {
+    console.log(data);
+});
+
 $(document).ready(function() {
-    $('#login').submit(function() {
-        var username = $('#login').find('#username').val();
-        var password = $('#login').find('#password').val();
+    /*
+     * Wolfram Alpha
+     */
+    $('#wolfram').click(function() {
+        var id = '3H76V5-8VKAX7RHXE'; 
         $.ajax({
-            type: "POST",
-            url: "https://dougal.union.ic.ac.uk/media/felix/preview/logincheck.php",
-            crossDomain: true,
+            type: "GET",
+            url: "http://api.wolframalpha.com/v2/query",
             data: {
-                username: username,
-                password: password
-            },
-            xhrFields: {
-                withCredentials: true
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR, textStatus, errorThrown);
+                input:"h2o",
+                format:"html",
+                appid:id
             },
             success: function(data) {
-                console.log(data);
+                var xmlDoc = $.parseXML(data);
+                var pod = $(xmlDoc).find("pod");
+                pod.each(function(index) {
+                    console.log(index+': '+$(this));
+                });
             }
         });
         return false;
     });
-
 });
