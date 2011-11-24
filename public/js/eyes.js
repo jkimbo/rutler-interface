@@ -16,13 +16,13 @@ $(document).ready(function() {
 		$(".eyeContainer").each(function(i, i2) { // for each eyecontainer
 			var eyeContainerPosition = $(this).offset(); // position relative to document
 			var eye = $("#eyeBall_" + $(this).attr("rel"));
+            var centerEyeContainerX = eyeContainerPosition.left + ($(this).width()/2) - (eye.width()/2) +1;
+            var centerEyeContainerY = eyeContainerPosition.top + ($(this).height()/2) - (eye.height()/2);
 			var eyePosition = {
-				'x' : eyeContainerPosition.left + ($(this).width()/2) - (eye.width()/2) +1, // initial eye position
-				'y' : eyeContainerPosition.top + ($(this).height()/2) - (eye.height()/2)
-			}
-            //console.log(eyePosition, eyeContainerPosition);
+				'x' : centerEyeContainerX, // initial eye position
+				'y' : centerEyeContainerY 			
+            }
             var slope = getSlope(eyePosition, mousePosition);
-            //var toCenterdistance = getDistance(eyePosition, mousePosition);
             var distanceX = eyePosition.x - mousePosition.x + (eye.width()/2);
             var distanceY = eyePosition.y - mousePosition.y + (eye.height()/2);
             var toCenterdistance = Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2));
@@ -47,8 +47,24 @@ $(document).ready(function() {
                 x = mousePosition.x - (eye.width()/2); 
                 y = mousePosition.y - (eye.height()/2);
             }
-            //x = eyePosition.x;
-            //y = eyePosition.y;
+
+            if($(this).attr("rel") == 1) { // left eye
+                var rightEyeContainer = $(this).next();
+                var rightEyeContainerX = rightEyeContainer.offset().left + (rightEyeContainer.width()/2) - ($('#eyeBall_2').width()/2) +1;
+                var eyeDistance = rightEyeContainerX - centerEyeContainerX;
+                if(x > centerEyeContainerX && targetDistance+$(this).width()/2 < eyeDistance) {
+                    x = centerEyeContainerX;
+                }
+            } else if ($(this).attr("rel") == 2) { // right eye
+                var leftEyeContainer = $(this).prev();
+                var leftEyeContainerX = leftEyeContainer.offset().left + (leftEyeContainer.width()/2) - ($('#eyeBall_1').width()/2) +1;
+                var eyeDistance = leftEyeContainerX - centerEyeContainerX;
+                console.log(targetDistance+$(this).width()/2, Math.abs(eyeDistance));
+                if(x < centerEyeContainerX && targetDistance+$(this).width()/2 < Math.abs(eyeDistance)) {
+                    x = centerEyeContainerX;
+                }
+            }
+
 			eye.css({
 				'left' : x + 'px',
 				'top' : y + 'px',
