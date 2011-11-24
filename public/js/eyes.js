@@ -6,6 +6,11 @@ $(document).ready(function() {
 	var canvas = $("debugCanvas"); // not sure this is needed
 	canvas.width = document.width;
 	canvas.height = document.height;
+    var eyeDistanceApart;
+    var leftEyeCenter;
+    var rightEyeCenter;
+    var leftEye = $('#eyeBall_1');
+    var rightEye = $('#eyeBall_2');
 
 	$(document).mousemove(function(e) { // on mousemove
 		var mousePosition = {
@@ -49,27 +54,60 @@ $(document).ready(function() {
             }
 
             if($(this).attr("rel") == 1) { // left eye
-                var rightEyeContainer = $(this).next();
-                var rightEyeContainerX = rightEyeContainer.offset().left + (rightEyeContainer.width()/2) - ($('#eyeBall_2').width()/2) +1;
-                var eyeDistance = rightEyeContainerX - centerEyeContainerX;
-                if(x > centerEyeContainerX && targetDistance+$(this).width()/2 < eyeDistance) {
-                    x = centerEyeContainerX;
-                }
+                leftEyeCenter = centerEyeContainerX;
+                //var rightEyeContainer = $(this).next();
+                //var rightEyeContainerX = rightEyeContainer.offset().left + (rightEyeContainer.width()/2) - ($('#eyeBall_2').width()/2) +1;
+                //var eyeDistance = rightEyeContainerX - centerEyeContainerX;
+                //if(x > centerEyeContainerX && targetDistance+$(this).width()/2 < eyeDistance) {
+                    //x = centerEyeContainerX;
+                //}
             } else if ($(this).attr("rel") == 2) { // right eye
-                var leftEyeContainer = $(this).prev();
-                var leftEyeContainerX = leftEyeContainer.offset().left + (leftEyeContainer.width()/2) - ($('#eyeBall_1').width()/2) +1;
-                var eyeDistance = leftEyeContainerX - centerEyeContainerX;
-                console.log(targetDistance+$(this).width()/2, Math.abs(eyeDistance));
-                if(x < centerEyeContainerX && targetDistance+$(this).width()/2 < Math.abs(eyeDistance)) {
-                    x = centerEyeContainerX;
-                }
+                rightEyeCenter = centerEyeContainerX;
+                //var leftEyeContainer = $(this).prev();
+                //var leftEyeContainerX = leftEyeContainer.offset().left + (leftEyeContainer.width()/2) - ($('#eyeBall_1').width()/2) +1;
+                //var eyeDistance = leftEyeContainerX - centerEyeContainerX;
+                //console.log(targetDistance+$(this).width()/2, Math.abs(eyeDistance));
+                //if(x < centerEyeContainerX && targetDistance+$(this).width()/2 < Math.abs(eyeDistance)) {
+                    //x = centerEyeContainerX;
+                //}
             }
 
 			eye.css({
 				'left' : x + 'px',
 				'top' : y + 'px',
-			});
+			}).show();
 		});
+
+        eyeDistanceApart = rightEyeCenter - leftEyeCenter -2;
+        $('.eyeContainer').each(function(i, i) {
+            if(mousePosition.x > rightEyeCenter) { // if current mouse location is to the right
+                if(rightEye.offset().left - leftEye.offset().left < eyeDistanceApart) {
+                    leftEye.css('left', rightEye.offset().left - eyeDistanceApart);
+                }
+                leftEye.css('top', rightEye.css('top'));
+            } else if(mousePosition.x < rightEyeCenter && mousePosition.x > leftEyeCenter) { // in between eyes
+                leftEye.css('left', leftEyeCenter);
+                rightEye.css('left', rightEyeCenter);
+                if(mousePosition.y < $(this).offset().top-leftEye.height()/2) {
+                    leftEye.css('top', $(this).offset().top-leftEye.height()/2);
+                    rightEye.css('top', $(this).offset().top-rightEye.height()/2);
+                } else if(mousePosition.y > $(this).offset().top && mousePosition.y < $(this).offset().top + $(this).height()) {
+                    leftEye.css('top', mousePosition.y);
+                    rightEye.css('top', mousePosition.y);
+                } else if(mousePosition.y > $(this).offset().top + $(this).height()) {
+                    leftEye.css('top', $(this).offset().top + $(this).height() - leftEye.height()/2);
+                    rightEye.css('top', $(this).offset().top + $(this).height() - rightEye.height()/2);
+                } else {
+                    leftEye.css('top', mousePosition.y);
+                    rightEye.css('top', mousePosition.y);
+                }
+            } else if(mousePosition.x < leftEyeCenter) { // to the left
+                if(rightEye.offset().left - leftEye.offset().left < eyeDistanceApart) {
+                    rightEye.css('left', leftEye.offset().left + eyeDistanceApart);
+                }
+                rightEye.css('top', leftEye.css('top'));
+            }
+        });
 	})
 });
 
