@@ -18,6 +18,6 @@ class NodeProcess(object):
 if __name__ == '__main__':
     node = NodeProcess()
     #print node.proc.stdout.readline()
-    node.proc.stdin.write('console.log("hello")')
+    node.proc.stdin.write('console.log("hello world")')
     print node.proc.stdout.readline()
     node.proc.terminate()

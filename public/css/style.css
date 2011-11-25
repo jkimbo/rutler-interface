@@ -7,7 +7,7 @@ a {
 }
 .face {
   width: 800px;
-  height: 300px;
+  height: 380px;
   margin: 0 auto;
   position: relative;
 }
@@ -18,7 +18,7 @@ a {
   border-radius: 200px;
   float: left;
   margin-top: 16px;
-  margin-left: 100px;
+  margin-left: 130px;
 }
 .eyeBall {
   border: 1px solid black;
@@ -33,7 +33,7 @@ a {
 .mouth {
   border: 1px solid #000;
   height: 0px;
-  width: 50px;
+  width: 200px;
   -webkit-border-bottom-right-radius: 500px;
   -webkit-border-bottom-left-radius: 500px;
   -moz-border-radius-bottomright: 500px;
@@ -41,8 +41,16 @@ a {
   border-bottom-right-radius: 500px;
   border-bottom-left-radius: 500px;
   bottom: 10px;
-  left: 25px;
+  left: 295px;
   position: absolute;
+}
+#bowtie {
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+#bowtie img {
+  width: 300px;
 }
 #debugCanvas {
   width: 100%;
