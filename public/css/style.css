@@ -60,15 +60,31 @@ a {
   left: 0px;
 }
 ul#messagelist {
-  height: 60px;
+  height: 150px;
   width: 200px;
   overflow: auto;
-  padding: 10px;
   position: absolute;
   bottom: 0px;
   right: 10%;
   border: 1px solid #BEBEBE;
 }
 ul#messagelist li {
+  margin-bottom: 5px;
+}
+ul#messagelist li.error {
   color: red;
+}
+.debugMessage {
+  width: 85%;
+}
+.debugMessage ul li {
+  margin-bottom: 5px;
+}
+.debugMessage ul span {
+  font-style: italic;
+  color: #666;
+  margin-right: 15px;
+}
+.debugMessage ul .info {
+  font-style: italic;
 }

@@ -72,15 +72,34 @@ a {
 }
 
 ul#messagelist {
-    height: 60px;
+    height: 150px;
     width: 200px;
     overflow:auto;
-    padding: 10px;
     position: absolute;
     bottom: 0px;
     right: 10%;
     border: 1px solid #BEBEBE;
 	li {
-		color: @alert;
+        &.error {
+            color: @alert;
+        }
+        margin-bottom: 5px;
 	}
 }	
+
+.debugMessage {
+    width: 85%;
+    ul {
+        li {
+            margin-bottom: 5px;
+        }
+        span {
+            font-style: italic;
+            color: #666;
+            margin-right: 15px;
+        }
+        .info {
+            font-style: italic;
+        }
+    }
+}
