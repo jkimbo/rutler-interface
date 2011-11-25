@@ -6,8 +6,6 @@ socket.on('connect', function() {
 });
 
 socket.on('message', function(data) {
-    //var something = $.parseJSON(data.message.replace('\n',''));
-    //console.log(something);
     add_message(data.message);
 });
 
@@ -32,6 +30,7 @@ function add_error_message(message) {
 }
 
 $(document).ready(function() {
+    // debug page
     if($('.debugMessage').length) {
         var list = $('.debugMessage ul');
         socket.on('connect', function() {
@@ -62,6 +61,18 @@ $(document).ready(function() {
                 .prepend(
                     $('<span>')
                     .text('[message] ')
+                )
+            );
+            toBottom();
+        });
+        socket.on('narrate', function(data) {
+            list.append(
+                $('<li>')
+                .addClass('narrate')
+                .text(JSON.stringify(data))
+                .prepend(
+                    $('<span>')
+                    .text('[narrate] ')
                 )
             );
             toBottom();
