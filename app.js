@@ -50,15 +50,17 @@ var face = io.of('/face').on('connection', function(socket) {
 });
 
 process.stdin.on('data', function (chunk) {
-    //process.stdout.write('data: ' + chunk);
-    try {
-        var input = JSON.parse(chunk);
-        if(input['mouth']) {
-            face.emit('mouth', { mouth: input.mouth });
+    var splitResult = chunk.split(",");
+    for(i = 0; i < splitResult.length; i++) {
+        try {
+            var input = JSON.parse(splitResult[i]);
+            if(input['mouth']) {
+                face.emit('mouth', { mouth: input.mouth });
+            }
+        } catch (err) {
+            console.log('error',err);
+            io.sockets.emit('message', { message: splitResult[i] });
         }
-    } catch (err) {
-        console.log('error',err);
-        io.sockets.emit('message', { message: chunk });
     }
 });
 

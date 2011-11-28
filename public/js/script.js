@@ -6,28 +6,26 @@ socket.on('connect', function() {
 });
 
 socket.on('message', function(data) {
-    add_message(data.message);
+    console.log(data);
 });
 
 socket.on('narrate', function(data) {
     console.log(data);
 });
 
+var $mouth = $('.mouth');
 face.on('mouth', function(data) {
+    console.log(JSON.stringify(data));
     if(data.mouth) {
-        mouth[data.mouth].apply($('.mouth'));
+        mouth['defualt'].apply($mouth, [function() {
+            mouth[data.mouth].apply($mouth);
+        }]); // apply default before doing anything
+        //mouth[data.mouth].apply($mouth);
     }
 });
 
-function add_message(message) {
-    $('#messagelist').append($('<li>').text(data.message));
-}
-
-function add_error_message(message) {
-    $('#messagelist').append($('<li>').text(data.message).addClas('error'));
-}
-
 $(document).ready(function() {
+    mouth['defualt'].apply($mouth); // apply default before doing anything
     // debug page
     if($('.debugMessage').length) {
         var list = $('.debugMessage ul');
