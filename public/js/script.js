@@ -14,10 +14,8 @@ socket.on('narrate', function(data) {
 });
 
 face.on('mouth', function(data) {
-    if(data.mouth == 'smile') {
-        $('.mouth').height(80);
-    } else if(data.mouth == 'look') {
-        $('.mouth').height(0);
+    if(data.mouth) {
+        mouth[data.mouth].apply($('.mouth'));
     }
 });
 
