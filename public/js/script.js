@@ -13,19 +13,19 @@ socket.on('narrate', function(data) {
     console.log(data);
 });
 
-var $mouth = $('.mouth');
-face.on('mouth', function(data) {
+face.on('face', function(data) {
     console.log(JSON.stringify(data));
-    if(data.mouth) {
-        mouth['defualt'].apply($mouth, [function() {
-            mouth[data.mouth].apply($mouth);
-        }]); // apply default before doing anything
-        //mouth[data.mouth].apply($mouth);
+    if(data.command) {
+        commands['reset'].apply();
+        commands[data.command].apply();
     }
 });
 
 $(document).ready(function() {
-    mouth['defualt'].apply($mouth); // apply default before doing anything
+    // initialisation 
+    mouth.element = $('.mouth');
+    commands['reset'].apply();
+
     // debug page
     if($('.debugMessage').length) {
         var list = $('.debugMessage ul');

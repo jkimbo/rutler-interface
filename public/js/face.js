@@ -6,6 +6,32 @@
  * Mouth
  */
 
+/* 
+ * Commands
+ */
+var commands = {
+    "reset": function() {
+        mouth.default();
+    },
+    "look": function() {
+        mouth.look();
+    },
+    "query": function() {
+        mouth.small();
+    },
+    "acknowledge": function() {
+        mouth.smileopen();    
+    },
+    "happy": function() {
+        mouth.smile();   
+    },
+    "sad": function() {
+        mouth.sad();   
+    },
+    "open": function() {
+        mouth.open();   
+    }
+}
 
 /* 
  * Methods:
@@ -25,9 +51,9 @@ var eyebrow = {
 }
 
 var mouth = {
-    defualt: function(callback) {
+    default: function() {
         // set defualts
-        $(this).css({
+        $(this.element).css({
             'border': '1px solid #000',
             'height': '0px',
             'width': '200px',
@@ -40,36 +66,33 @@ var mouth = {
             'bottom': '10px',
             'left': '295px'
         });
-        if(typeof(callback) == 'function') {
-            callback();
-        }
     },
     look: function() {
-        $(this).width('200px');    
+        $(this.element).width('200px');    
     },
     small: function() {
-        $(this).width('80px');    
+        $(this.element).width('80px');    
     },
     smile: function() {
-        $(this).css({
+        $(this.element).css({
             'border-top-right-radius': '0px',
             'border-top-left-radius': '0px',
             'border-bottom-right-radius': '500px',
             'border-bottom-left-radius': '500px',
             'border-top': 'none',
-            'width': '200px',
-            'height': '100px'
+            'width': '150px',
+            'height': '80px'
         });    
     },
     open: function() {
-        $(this).css({
+        $(this.element).css({
             'border-radius': '200px',
             'height': '100px',
             'width': '100px'
         });    
     },
     smileopen: function() {
-        $(this).css({
+        $(this.element).css({
             'border-top-right-radius': '0px',
             'border-top-left-radius': '0px',
             'border-bottom-right-radius': '500px',

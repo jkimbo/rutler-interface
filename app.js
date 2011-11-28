@@ -54,8 +54,8 @@ process.stdin.on('data', function (chunk) {
     for(i = 0; i < splitResult.length; i++) {
         try {
             var input = JSON.parse(splitResult[i]);
-            if(input['mouth']) {
-                face.emit('mouth', { mouth: input.mouth });
+            for(var j in input) {
+                face.emit(j, { command: input[j] });
             }
         } catch (err) {
             console.log('error',err);
