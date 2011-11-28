@@ -24,6 +24,8 @@ face.on('face', function(data) {
 $(document).ready(function() {
     // initialisation 
     mouth.element = $('.mouth');
+    eye.left = $('.eyeContainer#left');
+    eye.right = $('.eyeContainer#right');
     commands['reset'].apply();
 
     // debug page

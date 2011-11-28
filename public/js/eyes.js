@@ -75,7 +75,7 @@ $(document).ready(function() {
 			eye.css({
 				'left' : x + 'px',
 				'top' : y + 'px',
-			}).show();
+			});
 		});
 
         eyeDistanceApart = rightEyeCenter - leftEyeCenter -2;

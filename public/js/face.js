@@ -10,8 +10,9 @@
  * Commands
  */
 var commands = {
-    "reset": function() {
+    "reset": function() { // sets face to default
         mouth.default();
+        eye.default();
     },
     "look": function() {
         mouth.look();
@@ -30,6 +31,15 @@ var commands = {
     },
     "open": function() {
         mouth.open();   
+    },
+    "wink": function() {
+        mouth.smile();
+        eye['close'].apply(eye.right); // apply close function to right eye
+    },
+    "laughing": function() {
+        mouth.smileopen();
+        eye['close'].apply(eye.left); 
+        eye['close'].apply(eye.right);
     }
 }
 
@@ -37,13 +47,46 @@ var commands = {
  * Methods:
  */
 var eye = {
-    open: '',
-    close: '',
+    default: function() {
+        $('.eyeContainer').each(function(index) {
+            $(this).css({
+                'border': '1px solid black',
+                'width': '200px',
+                'height': '200px',
+                'border-radius': '200px',
+                'float': 'left',
+                'margin-top': '16px',
+                'margin-left': '130px',
+                'background': 'none'
+            });
+        });
+        $('.eyeBall').each(function(index) {
+            $(this).css({
+                'border': '1px solid black',
+                'background': 'black',
+                'width': '20px',
+                'height': '20px',
+                'border-radius': '60px',
+                'float': 'left',
+                'position': 'absolute'
+            }).show();
+        });
+    },
+    close: function() {
+        $(this).css({
+            'height': '1px',
+            'margin-top': '100px',
+            'background': 'black'
+        });
+        $('#eyeBall_'+$(this).attr('rel')).hide();
+    },
     crazy: ''
 }
 
 var eyebrow = {
-    normal: '',
+    normal: function() {
+
+    },
     up: '',
     'tilt-left': '',
     'tilt-right': '',
