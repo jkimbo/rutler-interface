@@ -14,28 +14,37 @@ a {
 
 .face {
 	width: 800px;
-	height: 380px;
+	height: 450px;
 	margin: 0 auto;
     position: relative;
 }
 
 .eyeBrow {
+    position: absolute;
     height: 0px;
     border: 1px solid black;
     width: 200px;
-    float: left;
-    margin-left: 130px;
-    margin-bottom: 40px;
+    &#left {
+        left: 130px;
+    }
+    &#right {
+        right: 130px;
+    }
 }
 
 .eyeContainer {
+    position: absolute;
 	border: 1px solid black;
 	width: 200px;
 	height: 200px;
 	border-radius: 200px;
-	float: left;
-	margin-top: 16px;
-	margin-left: 130px;
+    top: 50px;
+    &#left {
+        left: 130px;
+    }
+    &#right {
+        right: 130px;
+    }
 }
 
 .eyeBall {

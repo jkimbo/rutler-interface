@@ -61,10 +61,8 @@ var eye = {
                 'width': '200px',
                 'height': '200px',
                 'border-radius': '200px',
-                'float': 'left',
-                'margin-top': '16px',
-                'margin-left': '130px',
-                'background': 'none'
+                'background': 'none',
+                top: '120px'
             });
         });
         $('.eyeBall').each(function(index) {
@@ -82,7 +80,7 @@ var eye = {
     close: function() {
         $(this).css({
             'height': '1px',
-            'margin-top': '100px',
+            'top': '180px',
             'background': 'black'
         });
         $('#eyeBall_'+$(this).attr('rel')).hide();
@@ -97,12 +95,14 @@ var eyebrow = {
                 '-webkit-transform': 'rotate(0deg)',
                 heigth: 0,
                 width: '200px',
-                'margin-bottom': '40px'
+                'margin-bottom': '40px',
+                top: '50px'
             });
         });
     },
     up: function() {
         $(this).css({
+            top: '-30px'
         });
     },
     'tilt-left': function() {

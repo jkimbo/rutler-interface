@@ -1,15 +1,3 @@
-/*---------------------------------------------------
-    LESS Elements 0.6
-  ---------------------------------------------------
-    A set of useful LESS mixins by Dmitry Fadeyev
-    Special thanks for mixin suggestions to:
-      Kris Van Herzeele,
-      Benoit Adam,
-      Portenart Emile-Victor,
-      Ryan Faerman
-
-    More info at: http://lesselements.com
------------------------------------------------------*/
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -19,26 +7,35 @@ a {
 }
 .face {
   width: 800px;
-  height: 380px;
+  height: 450px;
   margin: 0 auto;
   position: relative;
 }
 .eyeBrow {
+  position: absolute;
   height: 0px;
   border: 1px solid black;
   width: 200px;
-  float: left;
-  margin-left: 130px;
-  margin-bottom: 40px;
+}
+.eyeBrow#left {
+  left: 130px;
+}
+.eyeBrow#right {
+  right: 130px;
 }
 .eyeContainer {
+  position: absolute;
   border: 1px solid black;
   width: 200px;
   height: 200px;
   border-radius: 200px;
-  float: left;
-  margin-top: 16px;
-  margin-left: 130px;
+  top: 50px;
+}
+.eyeContainer#left {
+  left: 130px;
+}
+.eyeContainer#right {
+  right: 130px;
 }
 .eyeBall {
   border: 1px solid black;
