@@ -105,3 +105,12 @@ ul#messagelist li.error {
 .debugMessage ul .info {
   font-style: italic;
 }
+#faces ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+#faces ul li {
+  float: left;
+  margin-right: 10px;
+}

@@ -40,6 +40,8 @@ var commands = {
     "wink": function() {
         mouth.smile();
         eye['close'].apply(eye.right); // apply close function to right eye
+        eyebrow['tilt-left'].call(eyebrow.right, 7);
+        eyebrow['tilt-right'].call(eyebrow.left, 7);
     },
     "laughing": function() {
         mouth.smileopen();
@@ -105,14 +107,16 @@ var eyebrow = {
             top: '-30px'
         });
     },
-    'tilt-left': function() {
+    'tilt-left': function(deg) {
+        if(deg == undefined) deg = 17;
         $(this).css({
-            '-webkit-transform': 'rotate(-17deg)'
+            '-webkit-transform': 'rotate(-'+deg+'deg)'
         });
     },
-    'tilt-right': function() {
+    'tilt-right': function(deg) {
+        if(deg == undefined) deg = 17;
         $(this).css({
-            '-webkit-transform': 'rotate(17deg)'
+            '-webkit-transform': 'rotate('+deg+'deg)'
         });
     },
     down: ''

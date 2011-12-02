@@ -30,6 +30,20 @@ $(document).ready(function() {
     eyebrow.right = $('.eyeBrow#right');
     commands['reset'].apply();
 
+    // Create command list 
+    $.each(commands, function(index) {
+        console.log(index);
+        var command = $('<li>').append($('<a>').attr({'data-command': index, 'href': '#'}).text(index));
+        $('#faces ul').append(command);
+    });
+
+    $('#faces a').on('click', function() {
+        var command = $(this).data('command'); 
+        commands['reset'].call();
+        commands[command].call();
+        return false;
+    });
+
     // debug page
     if($('.debugMessage').length) {
         var list = $('.debugMessage ul');
