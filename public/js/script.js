@@ -9,9 +9,29 @@ socket.on('message', function(data) {
     console.log(data);
 });
 
+function nextAlert() {
+    $('#bowtie').animate({opacity:0}, 100, function(){mouth.open(); mouth.small();});
+    $('#bowtie').animate({opacity:0}, 400, function(){mouth.default(); mouth.small();});
+    alerts.eq(currentAlert).animate({ opacity: 1, fontSize: "200%" }, 200, nextAlert); 
+
+    ++currentAlert;
+}
+
 socket.on('narrate', function(data) {
-    console.log(data);
-});
+	var words = data.message.replace(/ /g, " </span><span>");
+	$("#port").html('<span>'+words+'</span>');
+	
+	var alerts = $("#port span").animate({ opacity: 0 }, 0);
+	$('#bowtie').hide();
+	
+	var currentAlert = 0;
+	nextAlert();
+}); 
+
+socket.on('approached', function(data) {
+	$(".roomsearch").show();
+	$("#port").addClass("port_search");
+}); 
 
 face.on('face', function(data) {
     console.log(JSON.stringify(data));
@@ -29,6 +49,7 @@ $(document).ready(function() {
     eyebrow.left = $('.eyeBrow#left');
     eyebrow.right = $('.eyeBrow#right');
     commands['reset'].apply();
+	$(".roomsearch").hide(); 
 
     // Create command list 
     $.each(commands, function(index) {
@@ -118,3 +139,4 @@ JSON.stringify = JSON.stringify || function (obj) {
 function toBottom() {
     window.scroll(0,document.height);
 }
+
