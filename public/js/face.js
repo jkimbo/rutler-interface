@@ -13,18 +13,23 @@ var commands = {
     "reset": function() { // sets face to default
         mouth.default();
         eye.default();
+        eyebrow.default();
     },
     "look": function() {
         mouth.look();
     },
     "query": function() {
         mouth.small();
+        eyebrow['tilt-left'].apply(eyebrow.left);
+        eyebrow['up'].apply(eyebrow.left);
     },
     "acknowledge": function() {
         mouth.smileopen();    
     },
     "happy": function() {
         mouth.smile();   
+        eyebrow['tilt-left'].apply(eyebrow.left);
+        eyebrow['tilt-right'].apply(eyebrow.right);
     },
     "sad": function() {
         mouth.sad();   
@@ -40,6 +45,8 @@ var commands = {
         mouth.smileopen();
         eye['close'].apply(eye.left); 
         eye['close'].apply(eye.right);
+        eyebrow['tilt-left'].apply(eyebrow.left);
+        eyebrow['tilt-right'].apply(eyebrow.right);
     }
 }
 
@@ -84,12 +91,30 @@ var eye = {
 }
 
 var eyebrow = {
-    normal: function() {
-
+    default: function() {
+        $('.eyeBrow').each(function(index) {
+            $(this).css({
+                '-webkit-transform': 'rotate(0deg)',
+                heigth: 0,
+                width: '200px',
+                'margin-bottom': '40px'
+            });
+        });
     },
-    up: '',
-    'tilt-left': '',
-    'tilt-right': '',
+    up: function() {
+        $(this).css({
+        });
+    },
+    'tilt-left': function() {
+        $(this).css({
+            '-webkit-transform': 'rotate(-17deg)'
+        });
+    },
+    'tilt-right': function() {
+        $(this).css({
+            '-webkit-transform': 'rotate(17deg)'
+        });
+    },
     down: ''
 }
 

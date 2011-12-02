@@ -1,90 +1,110 @@
+/*---------------------------------------------------
+    LESS Elements 0.6
+  ---------------------------------------------------
+    A set of useful LESS mixins by Dmitry Fadeyev
+    Special thanks for mixin suggestions to:
+      Kris Van Herzeele,
+      Benoit Adam,
+      Portenart Emile-Victor,
+      Ryan Faerman
+
+    More info at: http://lesselements.com
+-----------------------------------------------------*/
 body {
-    padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 a {
-    color: #00B7FF;
+  color: #00B7FF;
 }
 .face {
-    width: 800px;
-    height: 380px;
-    margin: 0 auto;
-    position: relative;
+  width: 800px;
+  height: 380px;
+  margin: 0 auto;
+  position: relative;
+}
+.eyeBrow {
+  height: 0px;
+  border: 1px solid black;
+  width: 200px;
+  float: left;
+  margin-left: 130px;
+  margin-bottom: 40px;
 }
 .eyeContainer {
-    border: 1px solid black;
-    width: 200px;
-    height: 200px;
-    border-radius: 200px;
-    float: left;
-    margin-top: 16px;
-    margin-left: 130px;
+  border: 1px solid black;
+  width: 200px;
+  height: 200px;
+  border-radius: 200px;
+  float: left;
+  margin-top: 16px;
+  margin-left: 130px;
 }
 .eyeBall {
-    border: 1px solid black;
-    background: black;
-    width: 20px;
-    height: 20px;
-    border-radius: 60px;
-    float: left;
-    position: absolute;
-    display: none;
+  border: 1px solid black;
+  background: black;
+  width: 20px;
+  height: 20px;
+  border-radius: 60px;
+  float: left;
+  position: absolute;
+  display: none;
 }
 .mouth {
-    border: 1px solid #000;
-    height: 0px;
-    width: 200px;
-    /*-webkit-border-bottom-right-radius: 500px;*/
-    /*-webkit-border-bottom-left-radius: 500px;*/
-    /*-moz-border-radius-bottomright: 500px;*/
-    /*-moz-border-radius-bottomleft: 500px;*/
-    border-bottom-right-radius: 500px;
-    border-bottom-left-radius: 500px;
-    bottom: 10px;
-    left: 295px;
-    position: absolute;
+  border: 1px solid #000;
+  height: 0px;
+  width: 200px;
+  -webkit-border-bottom-right-radius: 500px;
+  -webkit-border-bottom-left-radius: 500px;
+  -moz-border-radius-bottomright: 500px;
+  -moz-border-radius-bottomleft: 500px;
+  border-bottom-right-radius: 500px;
+  border-bottom-left-radius: 500px;
+  bottom: 10px;
+  left: 295px;
+  position: absolute;
 }
 #bowtie {
-      width: 300px;
-      margin: 0 auto;
-      margin-top: 40px;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 40px;
 }
 #bowtie img {
-    width: 300px;
+  width: 300px;
 }
 #debugCanvas {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
 }
 ul#messagelist {
-    height: 150px;
-    width: 200px;
-    overflow: auto;
-    position: absolute;
-    bottom: 0px;
-    right: 10%;
-    border: 1px solid #BEBEBE;
+  height: 150px;
+  width: 200px;
+  overflow: auto;
+  position: absolute;
+  bottom: 0px;
+  right: 10%;
+  border: 1px solid #BEBEBE;
 }
 ul#messagelist li {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 ul#messagelist li.error {
-    color: red;
+  color: red;
 }
 .debugMessage {
-    width: 85%;
+  width: 85%;
 }
 .debugMessage ul li {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 .debugMessage ul span {
-    font-style: italic;
-    color: #666;
-    margin-right: 15px;
+  font-style: italic;
+  color: #666;
+  margin-right: 15px;
 }
 .debugMessage ul .info {
-    font-style: italic;
+  font-style: italic;
 }

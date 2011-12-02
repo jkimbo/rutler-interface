@@ -26,6 +26,8 @@ $(document).ready(function() {
     mouth.element = $('.mouth');
     eye.left = $('.eyeContainer#left');
     eye.right = $('.eyeContainer#right');
+    eyebrow.left = $('.eyeBrow#left');
+    eyebrow.right = $('.eyeBrow#right');
     commands['reset'].apply();
 
     // debug page
