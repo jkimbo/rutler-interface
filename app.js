@@ -43,7 +43,8 @@ process.stdin.resume();
 process.stdin.setEncoding('utf8');
 
 io.sockets.on('connection', function(socket) {
-    socket.emit('narrate', { message: 'Enter which room you would like to go to, or which staff member you would like to see:' });
+    //socket.emit('narrate', { message: 'Enter which room you would like to go to, or which staff member you would like to see:' });
+    socket.emit('narrate', { message: "Hello! I'm RUTLER" });
     socket.emit('approached', { message: 'none' });
 });
 

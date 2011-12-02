@@ -1,7 +1,5 @@
 .eyeBall(id='eyeBall_1')
 .eyeBall(id='eyeBall_2')
-.roomsearch
-  input#room
 .face
   .eyeBrow(id='left')
   .eyeBrow(id='right')
@@ -10,8 +8,12 @@
   canvas(id='debugCanvas')
   pre(class='debug')
   .mouth
-#bowtie
-  img(src='/img/bowtie.jpg')
+  #box
+    .roomsearch
+      input(type="text", id="room")
+#talkingBox
+  #port
+  #bowtie
+    img(src='/img/bowtie.jpg')
 #faces
   ul
-div#port

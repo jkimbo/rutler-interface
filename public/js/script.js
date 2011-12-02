@@ -9,28 +9,36 @@ socket.on('message', function(data) {
     console.log(data);
 });
 
-function nextAlert() {
-    $('#bowtie').animate({opacity:0}, 100, function(){mouth.open(); mouth.small();});
-    $('#bowtie').animate({opacity:0}, 400, function(){mouth.default(); mouth.small();});
-    alerts.eq(currentAlert).animate({ opacity: 1, fontSize: "200%" }, 200, nextAlert); 
-
-    ++currentAlert;
-}
 
 socket.on('narrate', function(data) {
 	var words = data.message.replace(/ /g, " </span><span>");
-	$("#port").html('<span>'+words+'</span>');
-	
-	var alerts = $("#port span").animate({ opacity: 0 }, 0);
-	$('#bowtie').hide();
+
+    $('#bowtie').fadeTo(0.8, 0, function() {});
+
+    $("#port").html('<span>'+words+'</span>');
+    var alerts = $("#port span").animate({ opacity: 0 }, 0);
+    function nextAlert() {
+        //$('#bowtie').animate({opacity:0}, 100, function(){
+            //mouth.open(); 
+            //mouth.small();
+        //});
+        //$('#bowtie').animate({opacity:0}, 400, function(){
+            //mouth.default(); 
+            //mouth.small();
+        //});
+
+        alerts.eq(currentAlert).animate({ opacity: 1, fontSize: "200%" }, 200, nextAlert); 
+
+        ++currentAlert;
+    }
 	
 	var currentAlert = 0;
 	nextAlert();
 }); 
 
 socket.on('approached', function(data) {
-	$(".roomsearch").show();
-	$("#port").addClass("port_search");
+    //$("#box").show();
+	//$("#port").addClass("port_search");
 }); 
 
 face.on('face', function(data) {

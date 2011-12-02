@@ -124,6 +124,9 @@ ul#messagelist {
 }
 
 #faces {
+    position: fixed;
+    bottom: 5px;
+    left: 5px;
     ul {
         list-style-type: none;
         margin: 0;
@@ -135,17 +138,27 @@ ul#messagelist {
     }
 }
 
+#box {
+    display: none;
+    position: absolute;
+	width: 100%;
+	height: 100%;
+    background: #fff;
+    z-index: 999;
+    border: 1px solid #BEBEBE;
+}
+
 .roomsearch {
 	background-color: white;
     width: 800px;
     height: 380px;
-    margin: 0 -400px;
 	left: 50%;
 	top: 72px;
     position: absolute;
-	z-index: 1;
+	z-index: 999;
 	text-align: center;
 }
+
 #room {
     width: 500px;
     height: 38px;
@@ -154,16 +167,14 @@ ul#messagelist {
 	border: 3px solid #262E6C;
 	padding: 10px;
 }
-.port_search {
-    left: 50%;
-    margin: 0 -400px;
-    position: absolute;
-    top: 100px;
-    width: 800px;
-    z-index: 1;
+
+#talkingBox {
+    height: 100px;
+    #port {
+        font-size: 200%;
+        text-align: center;
+        padding-top: 30px;
+    }
 }
-#port {
-  font-size: 200%;
-  text-align: center;
-}
+
 
