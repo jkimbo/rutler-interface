@@ -174,7 +174,16 @@ var mouth = {
         });    
     },
     sad: function() {
-        
+        $(this.element).css({
+            'border-top-right-radius': '70px',
+            'border-top-left-radius': '70px',
+            'border-bottom-right-radius': '0px',
+            'border-bottom-left-radius': '0px',
+            'border-bottom': 'none',
+            'width': '150px',
+            'height': '20px'
+            
+        });
     },
     dizzy: function() {
 
