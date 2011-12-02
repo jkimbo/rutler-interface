@@ -46,6 +46,15 @@ var commands = {
 /* 
  * Methods:
  */
+/*var face = {
+	show: function() {
+		.face
+	}
+	hide: function() {
+		
+	}	
+}*/
+
 var eye = {
     default: function() {
         $('.eyeContainer').each(function(index) {

@@ -43,7 +43,8 @@ process.stdin.resume();
 process.stdin.setEncoding('utf8');
 
 io.sockets.on('connection', function(socket) {
-    socket.emit('narrate', { message: 'Hello!' });
+    socket.emit('narrate', { message: 'Enter which room you would like to go to, or which staff member you would like to see:' });
+    socket.emit('approached', { message: 'none' });
 });
 
 var face = io.of('/face').on('connection', function(socket) {

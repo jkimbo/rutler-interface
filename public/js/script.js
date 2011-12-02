@@ -10,8 +10,28 @@ socket.on('message', function(data) {
 });
 
 socket.on('narrate', function(data) {
-    console.log(data);
-});
+	var words = data.message.replace(/ /g, " </span><span>");
+	$("#port").html('<span>'+words+'</span>');
+	
+	var alerts = $("#port span").animate({ opacity: 0 }, 0);
+	$('#bowtie').hide();
+	
+	var currentAlert = 0;
+	function nextAlert() {
+
+		$('#bowtie').animate({opacity:0}, 100, function(){mouth.open(); mouth.small();});
+	  	$('#bowtie').animate({opacity:0}, 400, function(){mouth.default(); mouth.small();});
+	  	alerts.eq(currentAlert).animate({ opacity: 1, fontSize: "200%" }, 200, nextAlert); 
+
+	  	++currentAlert;
+	}
+	nextAlert();
+}); 
+
+socket.on('approached', function(data) {
+	$(".roomsearch").show();
+	$("#port").addClass("port_search");
+}); 
 
 face.on('face', function(data) {
     console.log(JSON.stringify(data));
@@ -27,7 +47,8 @@ $(document).ready(function() {
     eye.left = $('.eyeContainer#left');
     eye.right = $('.eyeContainer#right');
     commands['reset'].apply();
-
+	$(".roomsearch").hide(); 
+	
     // debug page
     if($('.debugMessage').length) {
         var list = $('.debugMessage ul');
