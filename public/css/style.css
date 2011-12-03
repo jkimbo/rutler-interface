@@ -119,6 +119,20 @@ ul#messagelist li.error {
   float: left;
   margin-right: 10px;
 }
+#commands {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+}
+#commands ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+#commands ul li {
+  float: left;
+  margin-right: 10px;
+}
 #box {
   display: none;
   position: absolute;

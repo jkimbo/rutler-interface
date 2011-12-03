@@ -11,19 +11,19 @@ socket.on('message', function(data) {
 
 var talking = {
     isTalking: false, // currently talking
-    messages: [],
+    messages: [], // queue of messages to be said
     talk : function(message) {
-        this.isTalking = true;
+        this.isTalking = true; // set rutler as talking
         var words = message.replace(/ /g, " </span><span>");
         $("#port").html('<span>'+words+'</span>');
         var alerts = $("#port span").animate({ opacity: 0 }, 0);
         this.currentWord = 0;
-
         this.showWords(alerts, function() {
-            console.log('hello');
             if(talking.messages.length) {
-                talking.talk(talking.messages[0]);
-                talking.messages.splice(0,1); // remove element from array
+                var timeout = setTimeout(function() {
+                    talking.talk(talking.messages[0]);
+                    talking.messages.splice(0,1); // remove element from array
+                }, 400);
             } else {
                 talking.isTalking = false;
             }
@@ -31,7 +31,6 @@ var talking = {
     },
     showWords: function(words, callback) {
         if(words.eq(talking.currentWord).length) {
-            console.log(words.eq(talking.currentWord));
             words.eq(talking.currentWord).animate({
                 opacity: 1, 
                 fontSize: "200%" 
@@ -46,10 +45,10 @@ var talking = {
 }
 
 socket.on('narrate', function(data) {
-    $('#bowtie').fadeTo(0.8, 0, function() {});
-    if(talking.isTalking) {
+    $('#bowtie').hide();
+    if(talking.isTalking) { // if rutler is currently talking then queue up the message
         talking.messages.push(data.message);
-    } else {
+    } else { // else just say it
         talking.talk(data.message);
     }
 }); 
@@ -57,6 +56,7 @@ socket.on('narrate', function(data) {
 socket.on('approached', function(data) {
     //$("#box").show();
 	//$("#port").addClass("port_search");
+    commands['acknowledge'].call();
 }); 
 
 face.on('face', function(data) {
@@ -79,7 +79,6 @@ $(document).ready(function() {
 
     // Create command list 
     $.each(commands, function(index) {
-        console.log(index);
         var command = $('<li>').append($('<a>').attr({'data-command': index, 'href': '#'}).text(index));
         $('#faces ul').append(command);
     });
@@ -88,6 +87,30 @@ $(document).ready(function() {
         var command = $(this).data('command'); 
         commands['reset'].call();
         commands[command].call();
+        return false;
+    });
+
+    // approached
+    $('#approached').click(function() {
+        socket.emit('approach_trigger', { message: 'true' });
+        return false;
+    });
+
+    // welcome message
+    $('#message').click(function() {
+        socket.emit('welcome_trigger', { message: 'true' });
+        return false;
+    });
+    $('#another_message').click(function() {
+        socket.emit('another_message', { message: 'true' });
+        return false;
+    });
+
+    // submit any message
+    $('#submitmessage').submit(function() {
+        var value = $(this).find('#text').val();
+        socket.emit('send_message', {message: value});
+        $(this).find('#text').val('');
         return false;
     });
 

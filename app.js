@@ -43,10 +43,21 @@ process.stdin.resume();
 process.stdin.setEncoding('utf8');
 
 io.sockets.on('connection', function(socket) {
-    //socket.emit('narrate', { message: 'Enter which room you would like to go to, or which staff member you would like to see:' });
-    socket.emit('narrate', { message: "Hello! My name is RUTLER.</br> How can I help?" });
-    socket.emit('narrate', { message: "Another message" });
-    socket.emit('approached', { message: 'none' });
+    socket.on('approach_trigger', function(data) {
+        socket.emit('approached', { message: 'none' });
+    });
+
+    socket.on('welcome_trigger', function(data) {
+        socket.emit('narrate', { message: "Hello! My name is RUTLER.</br> How can I help you?" });
+    });
+
+    socket.on('send_message', function(data) {
+        socket.emit('narrate', {message: data.message});
+    });
+
+    socket.on('another_message', function(data) {
+        socket.emit('narrate', { message: "Another message" });
+    });
 });
 
 var face = io.of('/face').on('connection', function(socket) {
