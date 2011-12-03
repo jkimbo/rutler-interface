@@ -9,31 +9,49 @@ socket.on('message', function(data) {
     console.log(data);
 });
 
+var talking = {
+    isTalking: false, // currently talking
+    messages: [],
+    talk : function(message) {
+        this.isTalking = true;
+        var words = message.replace(/ /g, " </span><span>");
+        $("#port").html('<span>'+words+'</span>');
+        var alerts = $("#port span").animate({ opacity: 0 }, 0);
+        this.currentWord = 0;
+
+        this.showWords(alerts, function() {
+            console.log('hello');
+            if(talking.messages.length) {
+                talking.talk(talking.messages[0]);
+                talking.messages.splice(0,1); // remove element from array
+            } else {
+                talking.isTalking = false;
+            }
+        });
+    },
+    showWords: function(words, callback) {
+        if(words.eq(talking.currentWord).length) {
+            console.log(words.eq(talking.currentWord));
+            words.eq(talking.currentWord).animate({
+                opacity: 1, 
+                fontSize: "200%" 
+            }, 200, function() {
+                talking.currentWord++;
+                talking.showWords(words, callback);
+            });
+        } else {
+            callback();
+        }
+    }
+}
 
 socket.on('narrate', function(data) {
-	var words = data.message.replace(/ /g, " </span><span>");
-
     $('#bowtie').fadeTo(0.8, 0, function() {});
-
-    $("#port").html('<span>'+words+'</span>');
-    var alerts = $("#port span").animate({ opacity: 0 }, 0);
-    function nextAlert() {
-        //$('#bowtie').animate({opacity:0}, 100, function(){
-            //mouth.open(); 
-            //mouth.small();
-        //});
-        //$('#bowtie').animate({opacity:0}, 400, function(){
-            //mouth.default(); 
-            //mouth.small();
-        //});
-
-        alerts.eq(currentAlert).animate({ opacity: 1, fontSize: "200%" }, 200, nextAlert); 
-
-        ++currentAlert;
+    if(talking.isTalking) {
+        talking.messages.push(data.message);
+    } else {
+        talking.talk(data.message);
     }
-	
-	var currentAlert = 0;
-	nextAlert();
 }); 
 
 socket.on('approached', function(data) {
@@ -57,7 +75,7 @@ $(document).ready(function() {
     eyebrow.left = $('.eyeBrow#left');
     eyebrow.right = $('.eyeBrow#right');
     commands['reset'].apply();
-	$(".roomsearch").hide(); 
+	//$(".roomsearch").hide(); 
 
     // Create command list 
     $.each(commands, function(index) {

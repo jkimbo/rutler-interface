@@ -147,7 +147,9 @@ ul#messagelist li.error {
   padding: 10px;
 }
 #talkingBox {
+  width: 800px;
   height: 100px;
+  margin: 0 auto;
 }
 #talkingBox #port {
   font-size: 200%;
