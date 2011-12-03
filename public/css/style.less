@@ -73,14 +73,6 @@ a {
     position: absolute;
 }
 
-#bowtie {
-    width: 300px;
-    margin: 0 auto;
-    margin-top: 40px;
-    img {
-        width: 300px;
-    }
-}
 
 #debugCanvas{
 	width: 100%;
@@ -185,12 +177,25 @@ ul#messagelist {
 
 #talkingBox {
     width: 800px;
-    height: 100px;
+    height: 200px;
     margin: 0 auto;
+    position: relative;
     #port {
+        width: 800px;
         font-size: 200%;
         text-align: center;
-        padding-top: 30px;
+        display: none;
+        top: 50px;
+        position: absolute;
+    }
+    #bowtie {
+        width: 300px;
+        left: 250px;
+        top: 40px;
+        position: absolute;
+        img {
+            width: 300px;
+        }
     }
 }
 

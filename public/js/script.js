@@ -13,9 +13,10 @@ var talking = {
     isTalking: false, // currently talking
     messages: [], // queue of messages to be said
     talk : function(message) {
+        $('#bowtie').fadeTo(100, 0.1);
         this.isTalking = true; // set rutler as talking
         var words = message.replace(/ /g, " </span><span>");
-        $("#port").html('<span>'+words+'</span>');
+        $("#port").html('<span>'+words+'</span>').show();
         var alerts = $("#port span").animate({ opacity: 0 }, 0);
         this.currentWord = 0;
         this.showWords(alerts, function() {
@@ -45,7 +46,6 @@ var talking = {
 }
 
 socket.on('narrate', function(data) {
-    $('#bowtie').hide();
     if(talking.isTalking) { // if rutler is currently talking then queue up the message
         talking.messages.push(data.message);
     } else { // else just say it

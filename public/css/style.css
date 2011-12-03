@@ -61,14 +61,6 @@ a {
   left: 295px;
   position: absolute;
 }
-#bowtie {
-  width: 300px;
-  margin: 0 auto;
-  margin-top: 40px;
-}
-#bowtie img {
-  width: 300px;
-}
 #debugCanvas {
   width: 100%;
   height: 100%;
@@ -162,11 +154,24 @@ ul#messagelist li.error {
 }
 #talkingBox {
   width: 800px;
-  height: 100px;
+  height: 200px;
   margin: 0 auto;
+  position: relative;
 }
 #talkingBox #port {
+  width: 800px;
   font-size: 200%;
   text-align: center;
-  padding-top: 30px;
+  display: none;
+  top: 50px;
+  position: absolute;
+}
+#talkingBox #bowtie {
+  width: 300px;
+  left: 250px;
+  top: 40px;
+  position: absolute;
+}
+#talkingBox #bowtie img {
+  width: 300px;
 }
