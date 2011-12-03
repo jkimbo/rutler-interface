@@ -7,7 +7,7 @@ a {
 }
 .face {
   width: 800px;
-  height: 450px;
+  height: 500px;
   margin: 0 auto;
   position: relative;
 }
@@ -57,7 +57,6 @@ a {
   -moz-border-radius-bottomleft: 500px;
   border-bottom-right-radius: 500px;
   border-bottom-left-radius: 500px;
-  bottom: 10px;
   left: 295px;
   position: absolute;
 }
