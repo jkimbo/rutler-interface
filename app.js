@@ -58,6 +58,10 @@ io.sockets.on('connection', function(socket) {
     socket.on('another_message', function(data) {
         socket.emit('narrate', { message: "Another message" });
     });
+
+    socket.on('output', function(data) {
+        process.stdout.write('{ "data": "' + data.message + '" }'+"\n");
+    });
 });
 
 var face = io.of('/face').on('connection', function(socket) {
