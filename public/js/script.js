@@ -100,6 +100,13 @@ var hand = {
     }
 };
 
+var box = {
+    element: $('#box'),
+    show: function() {
+        this.element.show();
+    }
+}
+
 face.on('face', function(data) {
     console.log(JSON.stringify(data));
     if(data.command) {
@@ -142,6 +149,7 @@ $(document).ready(function() {
         socket.emit('welcome_trigger', { message: 'true' });
         return false;
     });
+
     $('#another_message').click(function() {
         socket.emit('another_message', { message: 'true' });
         return false;
@@ -156,6 +164,11 @@ $(document).ready(function() {
         return false;
     });
 
+    // options
+    $('#prompt .options a').click(function() {
+        box.show();
+        return false;
+    });
     // debug page
     if($('.debugMessage').length) {
         var list = $('.debugMessage ul');
