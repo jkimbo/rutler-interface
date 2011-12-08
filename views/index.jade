@@ -8,13 +8,25 @@
   canvas(id='debugCanvas')
   pre(class='debug')
   .mouth
-  #box
-    .roomsearch
-      input(type="text", id="room")
 #talkingBox
   #port
   #bowtie
     img(src='/img/bowtie.jpg')
+#box
+  .display
+    .roomsearch
+      input(type="text", id="room")
+#prompt
+  .options
+    ul
+      li
+        a(href="#") Find a person or room
+      li
+        a(href="#") Show me Imperial news and events
+      li
+        a(href="#") Tell me a joke
+#hand
+  img(src='/img/hand-left.png')
 #faces
   ul
 #commands

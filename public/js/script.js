@@ -12,7 +12,7 @@ socket.on('message', function(data) {
 var talking = {
     isTalking: false, // currently talking
     messages: [], // queue of messages to be said
-    talk : function(message) {
+    talk : function(message, callback) {
         $('#bowtie').fadeTo(100, 0.1);
         this.isTalking = true; // set rutler as talking
         var words = message.replace(/ /g, " </span><span>");
@@ -27,6 +27,7 @@ var talking = {
                 }, 400);
             } else {
                 talking.isTalking = false;
+                callback();
             }
         });
     },
@@ -49,7 +50,17 @@ socket.on('narrate', function(data) {
     if(talking.isTalking) { // if rutler is currently talking then queue up the message
         talking.messages.push(data.message);
     } else { // else just say it
-        talking.talk(data.message);
+        talking.talk(data.message, function() {
+            commands['acknowledge'].call();
+            hand.element.show();
+            $('#prompt .options li a').each(function(index) {
+                if(hand.isMoving) {
+                    hand.points.push(this);
+                } else {
+                    hand.point(this);
+                }
+            });
+        });
     }
 }); 
 
@@ -57,7 +68,37 @@ socket.on('approached', function(data) {
     //$("#box").show();
 	//$("#port").addClass("port_search");
     commands['acknowledge'].call();
+    hand.element.show();
+    $('#prompt .options li a').each(function(index) {
+        if(hand.isMoving) {
+            hand.points.push(this);
+        } else {
+            hand.point(this);
+        }
+    });
 }); 
+
+var hand = {
+    element: $('#hand'),
+    isMoving: false,
+    points: [],
+    currentPoint: 0,
+    point: function(to) {
+        hand.isMoving = true;
+        var offset = $(to).offset();
+        hand.element.animate({
+            top: offset.top
+        }, 600, function() {
+            if(hand.points[hand.currentPoint]) {
+                hand.point(hand.points[hand.currentPoint]);
+                hand.currentPoint++;
+            } else {
+                hand.isMoving = false;
+                return false;
+            }
+        });
+    }
+};
 
 face.on('face', function(data) {
     console.log(JSON.stringify(data));

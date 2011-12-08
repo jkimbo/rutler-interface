@@ -176,7 +176,7 @@ ul#messagelist {
 
 #talkingBox {
     width: 960px;
-    height: 200px;
+    height: 400px;
     margin: 0 auto;
     position: relative;
     #port {
@@ -184,7 +184,7 @@ ul#messagelist {
         font-size: 200%;
         text-align: center;
         display: none;
-        top: 50px;
+        top: 160px;
         position: absolute;
     }
     #bowtie {
@@ -195,5 +195,45 @@ ul#messagelist {
         img {
             width: 500px;
         }
+    }
+}
+
+#prompt {
+    position: relative;
+    width: 960px;
+    height: 300px;
+    .options {
+        margin-left: 70px;
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            margin-top: 50px;
+            li {
+                font-size: 30px;
+                margin-bottom: 20px;
+                a {
+                    color: #444;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+    #showBox {
+        position: absolute;
+        left: 70px;
+        top: 50px;
+        width: 50px;
+        height: 50px;
+        background: url('../img/round_plus_icon&48-black.png') 0 0 no-repeat;
+    }
+}
+#hand {
+    /*display: none;*/
+    position: absolute;
+    right: 130px;
+    bottom: 0px;
+    img {
+        width: 150px;
     }
 }

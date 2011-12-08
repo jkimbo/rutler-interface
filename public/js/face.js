@@ -84,7 +84,7 @@ var eye = {
     close: function() {
         $(this).css({
             'height': '1px',
-            'top': '180px',
+            'top': '230px',
             'background': 'black'
         });
         $('#eyeBall_'+$(this).attr('rel')).hide();
@@ -140,7 +140,7 @@ var mouth = {
             'border-bottom-right-radius': '500px',
             'border-bottom-left-radius': '500px',
             'bottom': '10px',
-            'left': '280px'
+            'left': '300px'
         });
     },
     look: function() {
@@ -156,10 +156,8 @@ var mouth = {
             'border-bottom-right-radius': '500px',
             'border-bottom-left-radius': '500px',
             'border-top': 'none',
-            'width': '300px',
-            'height': '140px',
-            'left': '330px',
-            'bottom': '-40px'
+            'height': '180px',
+            'bottom': '-60px'
         });    
     },
     open: function() {
@@ -178,7 +176,7 @@ var mouth = {
             'border-bottom-right-radius': '500px',
             'border-bottom-left-radius': '500px',
             'height': '180px',
-            'bottom': '-50px'
+            'bottom': '-60px'
         });    
     },
     sad: function() {
