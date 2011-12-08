@@ -25,6 +25,8 @@ var commands = {
     },
     "acknowledge": function() {
         mouth.smileopen();    
+        eyebrow['tilt-left'].call(eyebrow.left, 13);
+        eyebrow['tilt-right'].call(eyebrow.right, 13);
     },
     "happy": function() {
         mouth.smile();   
@@ -40,8 +42,8 @@ var commands = {
     "wink": function() {
         mouth.smile();
         eye['close'].apply(eye.right); // apply close function to right eye
-        eyebrow['tilt-left'].call(eyebrow.right, 7);
-        eyebrow['tilt-right'].call(eyebrow.left, 7);
+        eyebrow['tilt-left'].call(eyebrow.right, 5);
+        eyebrow['tilt-right'].call(eyebrow.left, 5);
     },
     "laughing": function() {
         mouth.smileopen();
@@ -59,9 +61,9 @@ var eye = {
     default: function() {
         $('.eyeContainer').each(function(index) {
             $(this).css({
-                'border': '1px solid black',
-                'width': '200px',
-                'height': '200px',
+                'border': '2px solid black',
+                'width': '340px',
+                'height': '340px',
                 'border-radius': '200px',
                 'background': 'none',
                 top: '120px'
@@ -96,15 +98,17 @@ var eyebrow = {
             $(this).css({
                 '-webkit-transform': 'rotate(0deg)',
                 heigth: 0,
-                width: '200px',
+                width: '340px',
                 'margin-bottom': '40px',
-                top: '50px'
+                top: '50px',
+                border: '2px solid black',
+                background: 'black'
             });
         });
     },
     up: function() {
         $(this).css({
-            top: '-30px'
+            top: '-15px'
         });
     },
     'tilt-left': function(deg) {
@@ -126,9 +130,9 @@ var mouth = {
     default: function() {
         // set defualts
         $(this.element).css({
-            'border': '1px solid #000',
+            'border': '2px solid #000',
             'height': '0px',
-            'width': '200px',
+            'width': '400px',
             /*-webkit-border-bottom-right-radius: 500px;*/
             /*-webkit-border-bottom-left-radius: 500px;*/
             /*-moz-border-radius-bottomright: 500px;*/
@@ -136,14 +140,14 @@ var mouth = {
             'border-bottom-right-radius': '500px',
             'border-bottom-left-radius': '500px',
             'bottom': '10px',
-            'left': '295px'
+            'left': '280px'
         });
     },
     look: function() {
         $(this.element).width('200px');    
     },
     small: function() {
-        $(this.element).width('80px');    
+        $(this.element).width('80px').height('1px');    
     },
     smile: function() {
         $(this.element).css({
@@ -152,15 +156,19 @@ var mouth = {
             'border-bottom-right-radius': '500px',
             'border-bottom-left-radius': '500px',
             'border-top': 'none',
-            'width': '150px',
-            'height': '80px'
+            'width': '300px',
+            'height': '140px',
+            'left': '330px',
+            'bottom': '-40px'
         });    
     },
     open: function() {
         $(this.element).css({
             'border-radius': '200px',
-            'height': '100px',
-            'width': '100px'
+            'height': '150px',
+            'width': '150px',
+            'left': '405px',
+            'bottom': '-20px'
         });    
     },
     smileopen: function() {
@@ -169,8 +177,8 @@ var mouth = {
             'border-top-left-radius': '0px',
             'border-bottom-right-radius': '500px',
             'border-bottom-left-radius': '500px',
-            'width': '200px',
-            'height': '100px'
+            'height': '180px',
+            'bottom': '-50px'
         });    
     },
     sad: function() {
@@ -181,8 +189,8 @@ var mouth = {
             'border-bottom-left-radius': '0px',
             'border-bottom': 'none',
             'width': '150px',
-            'height': '20px'
-            
+            'height': '20px',
+            'left': '405px'
         });
     },
     dizzy: function() {

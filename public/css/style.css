@@ -1,15 +1,16 @@
 body {
-  padding: 50px;
+  margin-top: 140px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 a {
   color: #00B7FF;
 }
 .face {
-  width: 800px;
-  height: 500px;
+  width: 980px;
+  height: 700px;
   margin: 0 auto;
   position: relative;
+  margin-top: 20px;
 }
 .eyeBrow {
   position: absolute;
@@ -18,24 +19,24 @@ a {
   width: 200px;
 }
 .eyeBrow#left {
-  left: 130px;
+  left: 80px;
 }
 .eyeBrow#right {
-  right: 130px;
+  right: 80px;
 }
 .eyeContainer {
   position: absolute;
-  border: 1px solid black;
-  width: 200px;
-  height: 200px;
+  border: 2px solid black;
+  width: 260px;
+  height: 260px;
   border-radius: 200px;
   top: 50px;
 }
 .eyeContainer#left {
-  left: 130px;
+  left: 80px;
 }
 .eyeContainer#right {
-  right: 130px;
+  right: 80px;
 }
 .eyeBall {
   border: 1px solid black;
@@ -98,7 +99,7 @@ ul#messagelist li.error {
 }
 #faces {
   position: fixed;
-  bottom: 5px;
+  bottom: 20px;
   left: 5px;
 }
 #faces ul {
@@ -152,13 +153,13 @@ ul#messagelist li.error {
   padding: 10px;
 }
 #talkingBox {
-  width: 800px;
+  width: 960px;
   height: 200px;
   margin: 0 auto;
   position: relative;
 }
 #talkingBox #port {
-  width: 800px;
+  width: 960px;
   font-size: 200%;
   text-align: center;
   display: none;
@@ -166,11 +167,11 @@ ul#messagelist li.error {
   position: absolute;
 }
 #talkingBox #bowtie {
-  width: 300px;
-  left: 250px;
-  top: 40px;
+  width: 500px;
+  left: 230px;
+  top: 80px;
   position: absolute;
 }
 #talkingBox #bowtie img {
-  width: 300px;
+  width: 500px;
 }
