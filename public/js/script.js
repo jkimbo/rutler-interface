@@ -125,7 +125,17 @@ $(document).ready(function() {
     eyebrow.left = $('.eyeBrow#left');
     eyebrow.right = $('.eyeBrow#right');
     commands['reset'].apply();
-	//$(".roomsearch").hide(); 
+	//$(document).ready(function() {
+	//	$("input#personfinder").autocomplete({source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]});
+	//});
+	
+	try{
+		$(document).ready(function() {
+			$("input#personfinder").autocomplete({
+				source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
+			});
+		});
+	} catch(e){}
 
     //alert($(window).width());
     // Create command list 
@@ -268,3 +278,6 @@ function toBottom() {
     window.scroll(0,document.height);
 }
 
+window.onload = (function(){
+
+});
