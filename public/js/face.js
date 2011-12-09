@@ -140,14 +140,17 @@ var mouth = {
             'border-bottom-right-radius': '500px',
             'border-bottom-left-radius': '500px',
             'bottom': '10px',
-            'left': '300px'
+            'left': '300px',
+            'background': 'white'
         });
     },
     look: function() {
         $(this.element).width('200px');    
     },
     small: function() {
-        $(this.element).width('80px').height('1px');    
+        $(this.element).width('80px').height('1px').css({
+            'background': 'black'   
+        });    
     },
     smile: function() {
         $(this.element).css({
@@ -173,8 +176,9 @@ var mouth = {
         $(this.element).css({
             'border-top-right-radius': '0px',
             'border-top-left-radius': '0px',
-            'border-bottom-right-radius': '500px',
-            'border-bottom-left-radius': '500px',
+            'border-bottom-right-radius': '160px',
+            'border-bottom-left-radius': '160px',
+            'border': '2px solid black',
             'height': '180px',
             'bottom': '-60px'
         });    

@@ -1,5 +1,5 @@
 body {
-    margin-top: 140px;
+    margin-top: 70px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -11,6 +11,11 @@ a {
 }
 
 @alert: red;
+
+h3 {
+    font-size: 60px;
+    font-style: italic;
+}
 
 .face {
 	width: 980px;
@@ -147,10 +152,10 @@ ul#messagelist {
 #box {
     display: none;
     position: absolute;
-	width: 900px;
-	height: 1300px;
-    top: 10px;
-    left: 30px;
+	width: 880px;
+	height: 1000px;
+    bottom: 30px;
+    left: 50px;
     background: #fff;
     z-index: 999;
     border: 1px solid #BEBEBE;
@@ -201,16 +206,17 @@ ul#messagelist {
 }
 
 #prompt {
-    position: relative;
-    width: 960px;
-    height: 300px;
+    margin-top: 70px;
+    padding: 50px;
+    padding-bottom: 30px;
+    /*border: 1px solid #BEBEBE;*/
+    background: #fff;
+    height: 200px;
     .options {
-        margin-left: 70px;
         ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
-            margin-top: 50px;
             li {
                 font-size: 30px;
                 margin-bottom: 20px;
@@ -231,12 +237,42 @@ ul#messagelist {
     }
 }
 
+#container {
+    width: 900px;
+    height: 400px;
+    overflow: hidden;
+    .slides {
+        width: 3000px;
+        .slide {
+            float: left;
+            width: 900px;
+            display: block;
+            margin-right: 50px;
+        }
+    }
+}
+
+#display {
+    display: none;
+    #personfinder {
+        width: 800px;
+        height: 50px;
+        padding: 5px;
+        font-size: 25px;
+    }
+}
+
 #hand {
-    /*display: none;*/
+    display: none;
     position: absolute;
     right: 130px;
-    bottom: 0px;
+    bottom: 80px;
     img {
         width: 150px;
     }
 }
+
+/* Contain floats: h5bp.com/q */
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { *zoom: 1; }

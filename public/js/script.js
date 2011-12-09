@@ -51,15 +51,15 @@ socket.on('narrate', function(data) {
         talking.messages.push(data.message);
     } else { // else just say it
         talking.talk(data.message, function() {
-            commands['acknowledge'].call();
-            hand.element.show();
-            $('#prompt .options li a').each(function(index) {
-                if(hand.isMoving) {
-                    hand.points.push(this);
-                } else {
-                    hand.point(this);
-                }
-            });
+            //commands['acknowledge'].call();
+            //hand.element.show();
+            //$('#prompt .options li a').each(function(index) {
+                //if(hand.isMoving) {
+                    //hand.points.push(this);
+                //} else {
+                    //hand.point(this);
+                //}
+            //});
         });
     }
 }); 
@@ -67,15 +67,17 @@ socket.on('narrate', function(data) {
 socket.on('approached', function(data) {
     //$("#box").show();
 	//$("#port").addClass("port_search");
-    commands['acknowledge'].call();
-    hand.element.show();
-    $('#prompt .options li a').each(function(index) {
-        if(hand.isMoving) {
-            hand.points.push(this);
-        } else {
-            hand.point(this);
-        }
-    });
+    //commands['acknowledge'].call();
+    //hand.element.show();
+    //$('#prompt .options li a').each(function(index) {
+        //if(hand.isMoving) {
+            //hand.points.push(this);
+        //} else {
+            //hand.point(this);
+        //}
+    //});
+    console.log(data);
+    $('#container').scrollTo($('#prompt'), 600);
 }); 
 
 var hand = {
@@ -125,6 +127,7 @@ $(document).ready(function() {
     commands['reset'].apply();
 	//$(".roomsearch").hide(); 
 
+    //alert($(window).width());
     // Create command list 
     $.each(commands, function(index) {
         var command = $('<li>').append($('<a>').attr({'data-command': index, 'href': '#'}).text(index));
@@ -166,9 +169,30 @@ $(document).ready(function() {
 
     // options
     $('#prompt .options a').click(function() {
-        box.show();
+        //box.show();
+        /* expand box */
+        // hide options
+        $(this).parent().parent().fadeOut(200, function() {
+            $('#container').css({
+                position: 'absolute',
+                top: '0px',
+                height: '1000px'
+            });
+            $('#prompt').css({
+                position: 'absolute',
+                bottom: '60px',
+                width: '900px'
+            })
+            .animate({
+                height: '800px'
+                //top: '10px'
+            }, 1000, function() {
+                $('#display').fadeIn(300);
+            });
+        });
         return false;
     });
+
     // debug page
     if($('.debugMessage').length) {
         var list = $('.debugMessage ul');

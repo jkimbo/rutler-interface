@@ -1,9 +1,13 @@
 body {
-  margin-top: 140px;
+  margin-top: 70px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 a {
   color: #00B7FF;
+}
+h3 {
+  font-size: 60px;
+  font-style: italic;
 }
 .face {
   width: 980px;
@@ -128,10 +132,10 @@ ul#messagelist li.error {
 #box {
   display: none;
   position: absolute;
-  width: 900px;
-  height: 1300px;
-  top: 10px;
-  left: 30px;
+  width: 880px;
+  height: 1000px;
+  bottom: 30px;
+  left: 50px;
   background: #fff;
   z-index: 999;
   border: 1px solid #BEBEBE;
@@ -178,18 +182,18 @@ ul#messagelist li.error {
   width: 500px;
 }
 #prompt {
-  position: relative;
-  width: 960px;
-  height: 300px;
-}
-#prompt .options {
-  margin-left: 70px;
+  margin-top: 70px;
+  padding: 50px;
+  padding-bottom: 30px;
+  /*border: 1px solid #BEBEBE;*/
+
+  background: #fff;
+  height: 200px;
 }
 #prompt .options ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  margin-top: 50px;
 }
 #prompt .options ul li {
   font-size: 30px;
@@ -207,13 +211,46 @@ ul#messagelist li.error {
   height: 50px;
   background: url('../img/round_plus_icon&48-black.png') 0 0 no-repeat;
 }
+#container {
+  width: 900px;
+  height: 400px;
+  overflow: hidden;
+}
+#container .slides {
+  width: 3000px;
+}
+#container .slides .slide {
+  float: left;
+  width: 900px;
+  display: block;
+  margin-right: 50px;
+}
+#display {
+  display: none;
+}
+#display #personfinder {
+  width: 800px;
+  height: 50px;
+  padding: 5px;
+  font-size: 25px;
+}
 #hand {
-  /*display: none;*/
-
+  display: none;
   position: absolute;
   right: 130px;
-  bottom: 0px;
+  bottom: 80px;
 }
 #hand img {
   width: 150px;
+}
+/* Contain floats: h5bp.com/q */
+.clearfix:before, .clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  *zoom: 1;
 }
