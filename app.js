@@ -62,6 +62,10 @@ io.sockets.on('connection', function(socket) {
     socket.on('output', function(data) {
         process.stdout.write('{ "data": "' + data.message + '" }'+"\n");
     });
+
+    socket.on('moveto', function(data) {
+        process.stdout.write('{ "action": "move", "value": "left" }'+"\n");
+    });
 });
 
 var face = io.of('/face').on('connection', function(socket) {

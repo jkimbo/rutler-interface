@@ -195,6 +195,12 @@ $(document).ready(function() {
         return false;
     });
 
+    // Left move
+    $('#leftmove').click(function() {
+        socket.emit('moveto', { message: true });
+        return false;
+    });
+
     // options
     $('#prompt .options a').click(function() {
         //box.show();
