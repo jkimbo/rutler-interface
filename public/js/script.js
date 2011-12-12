@@ -117,6 +117,16 @@ face.on('face', function(data) {
     }
 });
 
+face.on('talk', function(data) {
+    console.log(JSON.stringify(data));
+    if(talking.isTalking) { // if rutler is currently talking then queue up the message
+        talking.messages.push(data.command);
+    } else { // else just say it
+        talking.talk(data.command, function() {
+        });
+    }
+});
+
 var deg = -90;
 var t;
 
@@ -135,7 +145,6 @@ $(document).ready(function() {
     eyebrow.right = $('.eyeBrow#right');
     commands['reset'].apply();
     eyes.init();
-
 
     increment();
 

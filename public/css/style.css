@@ -165,7 +165,7 @@ ul#messagelist li.error {
   position: relative;
 }
 #talkingBox #port {
-  width: 960px;
+  width: 900px;
   font-size: 200%;
   text-align: center;
   display: none;
