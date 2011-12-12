@@ -189,8 +189,9 @@ $(document).ready(function() {
     // submit any message
     $('#submitmessage').submit(function() {
         var value = $(this).find('#text').val();
-        socket.emit('send_message', {message: value});
-        socket.emit('output', {message: value});
+        //socket.emit('send_message', {message: value});
+        //socket.emit('output', {message: value});
+        socket.emit('moveto', { message: value });
         $(this).find('#text').val('');
         return false;
     });

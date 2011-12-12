@@ -64,7 +64,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('moveto', function(data) {
-        process.stdout.write('{ "action": "move", "value": "left" }'+"\n");
+        process.stdout.write('{ "action": "move", "value": "'+data.message+'" }'+"\n");
     });
 });
 
