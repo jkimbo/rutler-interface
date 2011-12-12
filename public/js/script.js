@@ -117,6 +117,15 @@ face.on('face', function(data) {
     }
 });
 
+var deg = -90;
+var t;
+
+function increment() {
+    eyes.look(deg, deg);
+    deg += 3;
+    t = setTimeout('increment()', 100);
+}
+
 $(document).ready(function() {
     // initialisation 
     mouth.element = $('.mouth');
@@ -125,17 +134,17 @@ $(document).ready(function() {
     eyebrow.left = $('.eyeBrow#left');
     eyebrow.right = $('.eyeBrow#right');
     commands['reset'].apply();
-	//$(document).ready(function() {
-	//	$("input#personfinder").autocomplete({source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]});
-	//});
-	
-	try{
-		$(document).ready(function() {
-			$("input#personfinder").autocomplete({
-				source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
-			});
-		});
-	} catch(e){}
+    eyes.init();
+
+
+    increment();
+
+    /*
+     * jQuery UI Autocomplete
+     */
+    $("input#personfinder").autocomplete({
+        source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
+    });
 
     //alert($(window).width());
     // Create command list 

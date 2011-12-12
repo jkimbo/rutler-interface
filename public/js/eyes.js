@@ -1,11 +1,42 @@
-
 var windowX = -1;
 var windowY = -1;
 
+/*
+ * Eyes
+ */
+
+var eyes = {
+    left: $('#eyeBall_1'),
+    right: $('#eyeBall_2'),
+    init: function() {
+        $.each([this.left, this.right], function(index, value) {
+            var cont = value.parent();
+            var center = {
+                x: (cont.width()/2) - (value.width()/2) + 1,
+                y: (cont.height()/2) - (value.height()/2) + 1
+            };
+			value.css({
+				'left' : center.x + 'px',
+				'top' : center.y + 'px',
+			});
+        });
+    },
+    look: function(angleX, angleY) {
+        // angle from the center of the tablet 
+        // convert degree to radian
+        var radX = (angleX/180) * Math.PI;
+        var sinValX = Math.sin(radX);
+        $.each([this.left, this.right], function(index, value) {
+            var x = (value.parent().width()/2) * sinValX + (value.parent().width()/2) - (value.width()/2);
+            value.css({
+                'left': x+'px'
+            });
+        });
+    }
+}
+
 $(document).ready(function() {
-	var canvas = $("debugCanvas"); // not sure this is needed
-	canvas.width = document.width;
-	canvas.height = document.height;
+
     var eyeDistanceApart;
     var leftEyeCenter;
     var rightEyeCenter;
@@ -13,7 +44,7 @@ $(document).ready(function() {
     var rightEye = $('#eyeBall_2');
 
 	$(document).mousemove(function(e) { // on mousemove
-		var mousePosition = {
+		/*var mousePosition = {
 			'x' : e.pageX,
 			'y' : e.pageY
 		};
@@ -108,6 +139,7 @@ $(document).ready(function() {
                 rightEye.css('top', leftEye.css('top'));
             }
         });
+        */
 	})
 });
 

@@ -1,17 +1,10 @@
-link(rel='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css')
-
-script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js')
-script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js')
-
-.eyeBall(id='eyeBall_1')
-.eyeBall(id='eyeBall_2')
 .face
   .eyeBrow(id='left')
   .eyeBrow(id='right')
   .eyeContainer(rel='1', id='left')
+    .eyeBall(id='eyeBall_1')
   .eyeContainer(rel='2', id='right')
-  canvas(id='debugCanvas')
-  pre(class='debug')
+    .eyeBall(id='eyeBall_2')
   .mouth
 #container
   .slides.clearfix
