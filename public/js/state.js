@@ -1,7 +1,6 @@
 var states = {
     'looking': {
         init: function() {
-            console.log('initialise looking');
             $('#container').scrollTo($('#talkingBox'), 600);
         },
         to: ['approached'],
@@ -9,7 +8,6 @@ var states = {
     },
     'approached': {
         init: function() {
-            console.log('initialise approached');
             $('#container').scrollTo($('#prompt'), 600);
         },
         to: ['confirmLocation', 'promptOptions'],
