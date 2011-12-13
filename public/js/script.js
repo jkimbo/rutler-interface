@@ -206,6 +206,13 @@ $(document).ready(function() {
         return false;
     });
 
+    $('#submitLocation').submit(function() {
+        var value = $(this).find('#personfinder').val();
+        socket.emit('moveto', { message: value });
+        $(this).find('#personfinder').val('');
+        return false;
+    });
+
     /*
      * Set initial position
      */
