@@ -127,6 +127,10 @@ face.on('talk', function(data) {
     }
 });
 
+face.on('status', function(data) {
+    console.log(JSON.stringify(data));
+});
+
 var deg = -90;
 var t;
 
@@ -134,6 +138,21 @@ function increment() {
     eyes.look(deg, deg);
     deg += 3;
     t = setTimeout('increment()', 100);
+}
+
+var timer;
+var t_on = false;
+var count = 1;
+
+function sendStart() {
+    if(count <= 3) {
+	socket.emit('start', { message: true });
+	timer = setTimeout('sendStart()', 500);
+	count++;
+    } else {
+	clearTimeout(timer);
+	t_on = false;
+    }
 }
 
 $(document).ready(function() {
@@ -196,6 +215,15 @@ $(document).ready(function() {
         return false;
     });
 
+
+    $('#start').click(function() {
+	if(!t_on) {
+	    t_on = true;
+	    sendStart();
+	}
+	return false;
+    });
+
     // Left move
     $('#leftmove').click(function() {
         socket.emit('moveto', { message: true });
@@ -251,6 +279,17 @@ $(document).ready(function() {
             );
             toBottom();
         });
+	face.on('status', function(data) {
+            list.append(
+                $('<li>')
+                .text(JSON.stringify(data))
+                .prepend(
+                    $('<span>')
+                    .text('[status] ')
+                )
+            );
+            toBottom();
+	});
         socket.on('message', function(data) {
             list.append(
                 $('<li>')
