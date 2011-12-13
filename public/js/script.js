@@ -132,10 +132,10 @@ var timer;
 var t_on = false;
 var count = 1;
 
-function sendStart() {
+function sendStart(dest) {
     if(count <= 3) {
-        socket.emit('start', { message: 602 });
-        timer = setTimeout('sendStart()', 500);
+        socket.emit('start', { message: dest });
+        timer = setTimeout('sendStart('+dest+')', 500);
         count++;
     } else {
     	clearTimeout(timer);
@@ -219,9 +219,18 @@ $(document).ready(function() {
     $('#start').click(function() {
         if(!t_on) {
             t_on = true;
-            sendStart();
+            sendStart(600);
         }
         return false;
+    });
+
+    $('#start2').click(function() {
+	if(!t_on) {
+	    t_on = true;
+	    sendStart(201);
+	}
+	return false;
+>>>>>>> 939f08bc6d9e3754c99813bd795632010f25106a
     });
 
     // Left move
