@@ -68,7 +68,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('start', function(data) {
-	process.stdout.write('{ "action": "start", "value": "602" }'+"\n");
+	process.stdout.write('{ "action": "start", "value": "'+data.message+'" }'+"\n");
     });
 });
 
