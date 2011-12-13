@@ -68,7 +68,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('start', function(data) {
-	process.stdout.write('{ "action": "start", "value": "602" }'+"\n");
+        process.stdout.write('{ "action": "start", "value": "'+data.message+'" }'+"\n");
     });
 });
 
@@ -76,18 +76,14 @@ var face = io.of('/face').on('connection', function(socket) {
 });
 
 process.stdin.on('data', function (chunk) {
-    //var splitResult = chunk.split(",");
-    //console.log(splitResult);
-    //for(i = 0; i < splitResult.length; i++) {
-        try {
-            var input = JSON.parse(chunk);
-            for(var j in input) {
-                face.emit(j, { command: input[j] });
-            }
-        } catch (err) {
-            console.log('error',err);
-            io.sockets.emit('message', { message: chunk });
+    try {
+        var input = JSON.parse(chunk);
+        for(var j in input) {
+            face.emit(j, { command: input[j] });
         }
-    //}
+    } catch (err) {
+        console.log('error',err);
+        io.sockets.emit('message', { message: chunk });
+    }
 });
 

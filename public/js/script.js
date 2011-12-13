@@ -65,19 +65,7 @@ socket.on('narrate', function(data) {
 }); 
 
 socket.on('approached', function(data) {
-    //$("#box").show();
-	//$("#port").addClass("port_search");
-    //commands['acknowledge'].call();
-    //hand.element.show();
-    //$('#prompt .options li a').each(function(index) {
-        //if(hand.isMoving) {
-            //hand.points.push(this);
-        //} else {
-            //hand.point(this);
-        //}
-    //});
-    console.log(data);
-    $('#container').scrollTo($('#prompt'), 600);
+    stateMachine.goTo('approached');
 }); 
 
 var hand = {
@@ -146,12 +134,12 @@ var count = 1;
 
 function sendStart() {
     if(count <= 3) {
-	socket.emit('start', { message: true });
-	timer = setTimeout('sendStart()', 500);
-	count++;
+        socket.emit('start', { message: 602 });
+        timer = setTimeout('sendStart()', 500);
+        count++;
     } else {
-	clearTimeout(timer);
-	t_on = false;
+    	clearTimeout(timer);
+    	t_on = false;
     }
 }
 
@@ -167,6 +155,11 @@ $(document).ready(function() {
 
     increment();
 
+    /*
+     * Initialise state machine
+     */
+    stateMachine.init('looking');
+    
     /*
      * jQuery UI Autocomplete
      */
@@ -215,13 +208,15 @@ $(document).ready(function() {
         return false;
     });
 
-
+    /*
+     * Set initial position
+     */
     $('#start').click(function() {
-	if(!t_on) {
-	    t_on = true;
-	    sendStart();
-	}
-	return false;
+        if(!t_on) {
+            t_on = true;
+            sendStart();
+        }
+        return false;
     });
 
     // Left move
