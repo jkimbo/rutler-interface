@@ -27,6 +27,7 @@ var states = {
                 left: left,
                 top: top
             }).fadeIn(300);  
+            commands['apply'].call(this, 'query');
         },
         leaveState: function() {
             $('#popup').fadeOut(200);
@@ -54,7 +55,9 @@ var states = {
     'moving': {
         init: function() {
             states['speechRecog'].tries = 0;
-            box.hide();
+            box.hide(function() {
+                talking.talk('Ok lets go!');          
+            });
             commands['apply'].call(this, 'happy');
         },
         to: ['lift', 'finish'],
@@ -108,7 +111,6 @@ var stateMachine = {
 var box = {
     element: $('#box'),
     show: function(view) {
-        console.log(view);
         $('.options').fadeOut(200, function() {
             $('#container').css({
                 position: 'absolute',
@@ -128,17 +130,22 @@ var box = {
             });
         });
     },
-    hide: function() {
+    hide: function(callback) {
         $('#prompt').fadeOut(1000, function() {
             $('#container').css({
                 position: 'relative',
                 height: '400px'
             });
             $('#container').scrollTo($('#talkingBox'), 600);
+            if(typeof(callback) == 'function') {
+                callback();
+            }
         });
     },
     locationInput: function() {
-        $('#display .locationSubmit').fadeIn(300);
+        $('#display .locationSubmit').fadeIn(300, function() {
+            $('#display #submitLocation input').focus(); 
+        });
     },
     imperialNews: function() {
 

@@ -13,23 +13,27 @@ var talking = {
     isTalking: false, // currently talking
     messages: [], // queue of messages to be said
     talk : function(message, callback) {
-        $('#bowtie').fadeTo(100, 0.1);
-        this.isTalking = true; // set rutler as talking
-        var words = message.replace(/ /g, " </span><span>");
-        $("#port").html('<span>'+words+'</span>').show();
-        var alerts = $("#port span").animate({ opacity: 0 }, 0);
-        this.currentWord = 0;
-        this.showWords(alerts, function() {
-            if(talking.messages.length) {
-                var timeout = setTimeout(function() {
-                    talking.talk(talking.messages[0]);
-                    talking.messages.splice(0,1); // remove element from array
-                }, 400);
-            } else {
-                talking.isTalking = false;
-                callback();
-            }
-        });
+        if(talking.isTalking) { // if rutler is currently talking then queue up the message
+            talking.messages.push(message);
+        } else { // else just say it
+            $('#bowtie').fadeTo(100, 0.1);
+            this.isTalking = true; // set rutler as talking
+            var words = message.replace(/ /g, " </span><span>");
+            $("#port").html('<span>'+words+'</span>').show();
+            var alerts = $("#port span").animate({ opacity: 0 }, 0);
+            this.currentWord = 0;
+            this.showWords(alerts, function() {
+                if(talking.messages.length) {
+                    var timeout = setTimeout(function() {
+                        talking.talk(talking.messages[0]);
+                        talking.messages.splice(0,1); // remove element from array
+                    }, 400);
+                } else {
+                    talking.isTalking = false;
+                    callback();
+                }
+            });
+        }
     },
     showWords: function(words, callback) {
         if(words.eq(talking.currentWord).length) {
