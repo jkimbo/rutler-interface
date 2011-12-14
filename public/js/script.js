@@ -98,7 +98,6 @@ var hand = {
     }
 };
 
-
 face.on('face', function(data) {
     console.log(JSON.stringify(data));
     if(data.command) {
@@ -216,9 +215,8 @@ $(document).ready(function() {
 
     $('#submitLocation').submit(function() {
         var value = $(this).find('#personfinder').val();
-        socket.emit('moveto', { message: value });
         $(this).find('#personfinder').val('');
-        stateMachine.goTo('moving');
+        stateMachine.goTo('sendLocation', value);
         return false;
     });
 
@@ -275,6 +273,18 @@ $(document).ready(function() {
         console.log('speechCommand', JSON.stringify(data));
     });
 
+    /*
+     * Floor confirmation
+     */
+    $('#floorConfirm').click(function() {
+        if(!t_on) {
+            t_on = true;
+            sendStart(600);
+        }
+        stateMachine.goTo('moving');
+        return false;
+    });
+
     // debug page
     if($('.debugMessage').length) {
         var list = $('.debugMessage ul');
@@ -298,7 +308,7 @@ $(document).ready(function() {
             );
             toBottom();
         });
-	face.on('status', function(data) {
+        face.on('status', function(data) {
             list.append(
                 $('<li>')
                 .text(JSON.stringify(data))
@@ -308,7 +318,7 @@ $(document).ready(function() {
                 )
             );
             toBottom();
-	});
+        });
         socket.on('message', function(data) {
             list.append(
                 $('<li>')

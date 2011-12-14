@@ -3,7 +3,7 @@ var states = {
         init: function() {
             console.log('looking');
             $('#container').scrollTo($('#talkingBox'), 600);
-            commands['apply'].call(this, 'look');
+            commands['apply'].call(this, 'happy');
         },
         to: ['approached'],
         from: ['approached']
@@ -51,19 +51,29 @@ var states = {
             $('#container').scrollTo($('#prompt'), 0);
             box.show('locationInput'); 
         },
-        to: ['moving', 'promptOptions'],
+        to: ['sendLocation', 'promptOptions'],
         from: ['promptOptions', 'approached']
+    },
+    'sendLocation': {
+        init: function(location) {
+            console.log('sending location...');
+            socket.emit('moveto', { message: location });
+            stateMachine.goal = location;
+            stateMachine.goTo('moving');
+        },
+        to: ['moving'],
+        from: ['displayLocationInput', 'speechRecog']
     },
     'moving': {
         init: function() {
             states['speechRecog'].tries = 0;
             box.hide(function() {
-                talking.talk('Ok lets go!');          
+                talking.talk('Ok lets go!'); // get rid of this TODO       
             });
             commands['apply'].call(this, 'happy');
         },
         to: ['lift', 'finish'],
-        from: ['displayLocationInput', 'confirmLocation', 'speechRecog']
+        from: ['displayLocationInput', 'sendLocation', 'confirmLocation', 'speechRecog', 'lift']
     },
     'lift': {
         init: function() {
@@ -78,15 +88,19 @@ var states = {
                 commands['apply'].call(this, 'query');
             }, true);
         },
+        leaveState: function() {
+            $('#popup').fadeOut(200);
+        },
         to: ['moving'],
         from: ['moving']
     },
     'finish': {
         init: function() {
             // fanfare
-            commands['apply'].call(this, 'happy');
+            commands['apply'].call(this, 'laughing');
+            talking.talk('We are here!'); // get rid of this TODO       
         },
-        to: ['moving'],
+        to: ['moving', 'approach'],
         from: ['moving']
     }
 }
