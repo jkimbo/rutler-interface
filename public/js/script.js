@@ -113,10 +113,6 @@ face.on('status', function(data) {
     console.log(JSON.stringify(data));
 });
 
-face.on('recog', function(data) {
-    console.log(JSON.stringify(data));
-    stateMachine.goTo('speechRecog', data.command);
-});
 
 var deg = -90;
 var t;
@@ -243,6 +239,24 @@ $(document).ready(function() {
         stateMachine.goTo(state);
         /* expand box */
         // hide options
+        return false;
+    });
+
+    /*
+     * Speech regonition
+     */
+    face.on('recog', function(data) {
+        console.log(JSON.stringify(data));
+        stateMachine.goTo('speechRecog', data.command);
+    });
+
+    $('#recogConfirm').click(function() {
+        stateMachine.goTo('moving');
+        return false;
+    });
+
+    $('#recogDenied').click(function() {
+        stateMachine.goTo('approached');
         return false;
     });
 

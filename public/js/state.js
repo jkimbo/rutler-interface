@@ -10,23 +10,29 @@ var states = {
     },
     'approached': {
         init: function() {
-            $('#popup').fadeOut(200);
             commands['apply'].call(this, 'approach');
+            if(states['speechRecog'].tries >= 3) {
+                stateMachine.goTo('promptOptions');
+            }
         },
         to: ['confirmLocation', 'promptOptions', 'speechRecog'],
-        from: ['looking']
+        from: ['looking', 'speechRecog']
     },
     'speechRecog': {
         init: function(content) {
-            console.log(content);
-            var left = $(window).width()/2 - 150;
-            var top = $(window).height()/2 - 100;
+            states['speechRecog'].tries += 1; 
+            var left = $(window).width()/2 - 475;
+            $('#popup').find('#content').text(content);
             $('#popup').css({
                 left: left,
                 top: top
-            }).html('I heard: '+content+' Was that correct?').fadeIn(300);  
+            }).fadeIn(300);  
         },
-        to: ['moving', 'approached'],
+        leaveState: function() {
+            $('#popup').fadeOut(200);
+        },
+        tries: 0,
+        to: ['moving', 'approached', 'promptOptions'],
         from: ['approached', 'speechRecog']
     },
     'promptOptions': {
@@ -34,7 +40,7 @@ var states = {
             $('#container').scrollTo($('#prompt'), 600);
         },
         to: ['displayLocationInput', 'displayNews'],
-        from: ['approached']
+        from: ['approached','speechRecog']
     },
     'displayLocationInput': {
         init: function() {
@@ -46,12 +52,12 @@ var states = {
     },
     'moving': {
         init: function() {
-            console.log('moving');
+            states['speechRecog'].tries = 0;
             box.hide();
             commands['apply'].call(this, 'happy');
         },
         to: ['lift', 'finish'],
-        from: ['displayLocationInput', 'confirmLocation']
+        from: ['displayLocationInput', 'confirmLocation', 'speechRecog']
     },
     'lift': {
         init: function() {
@@ -86,6 +92,9 @@ var stateMachine = {
         } else if($.inArray(state, states[this.current].to) == -1) { // not found
             console.log("Hmmm you don't seem to be going to the right place");
         } else {
+            if(states[this.current].leaveState) {
+                states[this.current].leaveState();
+            }
             this.current = state;
             states[state].init(data);
         }
