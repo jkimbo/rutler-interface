@@ -113,6 +113,11 @@ face.on('status', function(data) {
     console.log(JSON.stringify(data));
 });
 
+face.on('recog', function(data) {
+    console.log(JSON.stringify(data));
+    stateMachine.goTo('speechRecog', data.command);
+});
+
 var deg = -90;
 var t;
 

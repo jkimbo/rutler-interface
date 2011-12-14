@@ -317,6 +317,14 @@ ul#messagelist li.error {
 .ui-menu-item:hover {
   background-color: #EDFFD2;
 }
+#popup {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  background: white;
+  border: 1px solid #BEBEBE;
+  padding: 10px;
+}
 /* Contain floats: h5bp.com/q */
 .clearfix:before, .clearfix:after {
   content: "";

@@ -10,10 +10,24 @@ var states = {
     },
     'approached': {
         init: function() {
+            $('#popup').fadeOut(200);
             commands['apply'].call(this, 'approach');
         },
-        to: ['confirmLocation', 'promptOptions'],
+        to: ['confirmLocation', 'promptOptions', 'speechRecog'],
         from: ['looking']
+    },
+    'speechRecog': {
+        init: function(content) {
+            console.log(content);
+            var left = $(window).width()/2 - 150;
+            var top = $(window).height()/2 - 100;
+            $('#popup').css({
+                left: left,
+                top: top
+            }).html('I heard: '+content+' Was that correct?').fadeIn(300);  
+        },
+        to: ['moving', 'approached'],
+        from: ['approached', 'speechRecog']
     },
     'promptOptions': {
         init: function() {
@@ -66,14 +80,14 @@ var stateMachine = {
             states[state].init();
         }
     },
-    goTo: function(state) {
+    goTo: function(state, data) {
         if($.inArray(this.current, states[state].from) == -1) {
             console.log("Hmmm you don't seem to be coming from the right place");
         } else if($.inArray(state, states[this.current].to) == -1) { // not found
             console.log("Hmmm you don't seem to be going to the right place");
         } else {
             this.current = state;
-            states[state].init();
+            states[state].init(data);
         }
     }
 }
