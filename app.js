@@ -45,7 +45,7 @@ process.stdin.setEncoding('utf8');
 
 io.sockets.on('connection', function(socket) {
     socket.on('approach_trigger', function(data) {
-        socket.emit('approached', { message: 'none' });
+        io.sockets.emit('approached', { message: 'none' });
     });
 
     socket.on('welcome_trigger', function(data) {
@@ -66,6 +66,7 @@ io.sockets.on('connection', function(socket) {
 
     socket.on('moveto', function(data) {
         process.stdout.write('{ "action": "move", "value": "'+data.message+'" }'+"\n");
+        io.sockets.emit('moving', { message: true });
     });
 
     socket.on('start', function(data) {

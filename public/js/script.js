@@ -285,6 +285,10 @@ $(document).ready(function() {
         return false;
     });
 
+    face.on('moving', function(data) {
+        stateMachine.goTo('moving');
+    });
+
     // debug page
     if($('.debugMessage').length) {
         var list = $('.debugMessage ul');
