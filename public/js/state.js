@@ -12,10 +12,10 @@ var states = {
         init: function() {
             commands['apply'].call(this, 'approach');
             if(states['speechRecog'].tries >= 3) {
-                stateMachine.goTo('promptOptions');
+                stateMachine.goTo('displayLocationInput');
             }
         },
-        to: ['confirmLocation', 'promptOptions', 'speechRecog'],
+        to: ['confirmLocation', 'promptOptions', 'speechRecog', 'displayLocationInput'],
         from: ['looking', 'speechRecog']
     },
     'speechRecog': {
@@ -45,6 +45,7 @@ var states = {
     'displayLocationInput': {
         init: function() {
             console.log('displayLocationInput');
+            $('#container').scrollTo($('#prompt'), 0);
             box.show('locationInput'); 
         },
         to: ['moving', 'promptOptions'],
