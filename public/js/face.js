@@ -10,6 +10,10 @@
  * Commands
  */
 var commands = {
+    apply: function(command) {
+        commands['reset'].apply();
+        commands[command].apply();
+    },
     reset: function() { // sets face to default
         mouth.default();
         eye.default();

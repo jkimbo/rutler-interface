@@ -3,14 +3,14 @@ var states = {
         init: function() {
             console.log('looking');
             $('#container').scrollTo($('#talkingBox'), 600);
-            commands['look'].apply();
+            commands['apply'].call(this, 'look');
         },
         to: ['approached'],
         from: ['approached']
     },
     'approached': {
         init: function() {
-            commands['approach'].apply();
+            commands['apply'].call(this, 'approach');
         },
         to: ['confirmLocation', 'promptOptions'],
         from: ['looking']
@@ -32,10 +32,27 @@ var states = {
     },
     'moving': {
         init: function() {
-            
+            console.log('moving');
+            box.hide();
+            commands['apply'].call(this, 'happy');
         },
         to: ['lift', 'finish'],
         from: ['displayLocationInput', 'confirmLocation']
+    },
+    'lift': {
+        init: function() {
+            // lift music!
+        },
+        to: ['moving'],
+        from: ['moving']
+    },
+    'finish': {
+        init: function() {
+            // fanfare
+            commands['apply'].call(this, 'happy');
+        },
+        to: ['moving'],
+        from: ['moving']
     }
 }
 
@@ -58,5 +75,48 @@ var stateMachine = {
             this.current = state;
             states[state].init();
         }
+    }
+}
+
+/*
+ * Display box
+ */
+var box = {
+    element: $('#box'),
+    show: function(view) {
+        console.log(view);
+        $('.options').fadeOut(200, function() {
+            $('#container').css({
+                position: 'absolute',
+                top: '0px',
+                height: '1000px'
+            });
+            $('#prompt').css({
+                position: 'absolute',
+                bottom: '60px',
+                width: '900px'
+            })
+            .animate({
+                height: '800px'
+                //top: '10px'
+            }, 1000, function() {
+                box[view].apply();
+            });
+        });
+    },
+    hide: function() {
+        $('#prompt').fadeOut(1000, function() {
+            $('#container').css({
+                position: 'relative',
+                height: '400px'
+            });
+            $('#container').scrollTo($('#talkingBox'), 600);
+        });
+    },
+    locationInput: function() {
+        $('#display .locationSubmit').fadeIn(300);
+    },
+    imperialNews: function() {
+
     }
 }

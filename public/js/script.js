@@ -90,39 +90,6 @@ var hand = {
     }
 };
 
-var box = {
-    element: $('#box'),
-    show: function(view) {
-        console.log(view);
-        $('.options').fadeOut(200, function() {
-            $('#container').css({
-                position: 'absolute',
-                top: '0px',
-                height: '1000px'
-            });
-            $('#prompt').css({
-                position: 'absolute',
-                bottom: '60px',
-                width: '900px'
-            })
-            .animate({
-                height: '800px'
-                //top: '10px'
-            }, 1000, function() {
-                box[view].apply();
-            });
-        });
-    },
-    hide: function() {
-
-    },
-    locationInput: function() {
-        $('#display .locationSubmit').fadeIn(300);
-    },
-    imperialNews: function() {
-
-    }
-}
 
 face.on('face', function(data) {
     console.log(JSON.stringify(data));
@@ -204,8 +171,7 @@ $(document).ready(function() {
 
     $('#faces a').on('click', function() {
         var command = $(this).data('command'); 
-        commands['reset'].call();
-        commands[command].call();
+        commands['apply'].call(this, command);
         return false;
     });
 
@@ -243,6 +209,7 @@ $(document).ready(function() {
         var value = $(this).find('#personfinder').val();
         socket.emit('moveto', { message: value });
         $(this).find('#personfinder').val('');
+        stateMachine.goTo('moving');
         return false;
     });
 
