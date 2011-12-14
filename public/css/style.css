@@ -284,10 +284,10 @@ ul#messagelist li.error {
   display: block;
   margin-right: 50px;
 }
-#display {
+#display .locationSubmit {
   display: none;
 }
-#display #personfinder {
+#display .locationSubmit #personfinder {
   width: 800px;
   height: 50px;
   padding: 5px;

@@ -19,8 +19,23 @@ var states = {
         init: function() {
             $('#container').scrollTo($('#prompt'), 600);
         },
-        to: [],
+        to: ['displayLocationInput', 'displayNews'],
         from: ['approached']
+    },
+    'displayLocationInput': {
+        init: function() {
+            console.log('displayLocationInput');
+            box.show('locationInput'); 
+        },
+        to: ['moving', 'promptOptions'],
+        from: ['promptOptions', 'approached']
+    },
+    'moving': {
+        init: function() {
+            
+        },
+        to: ['lift', 'finish'],
+        from: ['displayLocationInput', 'confirmLocation']
     }
 }
 

@@ -92,8 +92,35 @@ var hand = {
 
 var box = {
     element: $('#box'),
-    show: function() {
-        this.element.show();
+    show: function(view) {
+        console.log(view);
+        $('.options').fadeOut(200, function() {
+            $('#container').css({
+                position: 'absolute',
+                top: '0px',
+                height: '1000px'
+            });
+            $('#prompt').css({
+                position: 'absolute',
+                bottom: '60px',
+                width: '900px'
+            })
+            .animate({
+                height: '800px'
+                //top: '10px'
+            }, 1000, function() {
+                box[view].apply();
+            });
+        });
+    },
+    hide: function() {
+
+    },
+    locationInput: function() {
+        $('#display .locationSubmit').fadeIn(300);
+    },
+    imperialNews: function() {
+
     }
 }
 
@@ -199,6 +226,11 @@ $(document).ready(function() {
         return false;
     });
 
+    $('#prompt_options').click(function() {
+        stateMachine.goTo('promptOptions');
+        return false;
+    });
+
     // submit any message
     $('#submitmessage').submit(function() {
         var value = $(this).find('#text').val();
@@ -235,27 +267,10 @@ $(document).ready(function() {
 
     // options
     $('#prompt .options a').click(function() {
-        //box.show();
+        var state = $(this).data('state'); 
+        stateMachine.goTo(state);
         /* expand box */
         // hide options
-        $(this).parent().parent().fadeOut(200, function() {
-            $('#container').css({
-                position: 'absolute',
-                top: '0px',
-                height: '1000px'
-            });
-            $('#prompt').css({
-                position: 'absolute',
-                bottom: '60px',
-                width: '900px'
-            })
-            .animate({
-                height: '800px'
-                //top: '10px'
-            }, 1000, function() {
-                $('#display').fadeIn(300);
-            });
-        });
         return false;
     });
 
