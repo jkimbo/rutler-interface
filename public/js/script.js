@@ -140,6 +140,7 @@ function sendStart(dest) {
     } else {
     	clearTimeout(timer);
     	t_on = false;
+        count = 1;
     }
 }
 
@@ -225,12 +226,11 @@ $(document).ready(function() {
     });
 
     $('#start2').click(function() {
-	if(!t_on) {
-	    t_on = true;
-	    sendStart(201);
-	}
-	return false;
->>>>>>> 939f08bc6d9e3754c99813bd795632010f25106a
+        if(!t_on) {
+            t_on = true;
+            sendStart(201);
+        }
+        return false;
     });
 
     // Left move
