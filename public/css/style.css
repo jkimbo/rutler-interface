@@ -341,6 +341,12 @@ ul#messagelist li.error {
 #popup input#recogDenied {
   margin-right: 0px;
 }
+#popup .speechRecog {
+  display: none;
+}
+#popup .floorConfirm {
+  display: none;
+}
 /* Contain floats: h5bp.com/q */
 .clearfix:before, .clearfix:after {
   content: "";

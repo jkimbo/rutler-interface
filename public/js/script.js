@@ -12,13 +12,17 @@ socket.on('message', function(data) {
 var talking = {
     isTalking: false, // currently talking
     messages: [], // queue of messages to be said
-    talk : function(message, callback) {
+    talk : function(message, callback, html) {
         if(talking.isTalking) { // if rutler is currently talking then queue up the message
             talking.messages.push(message);
         } else { // else just say it
             $('#bowtie').fadeTo(100, 0.1);
             this.isTalking = true; // set rutler as talking
-            var words = message.replace(/ /g, " </span><span>");
+            if(html) {
+                var words = message.replace(/\/></g, "/></span><span><");
+            } else {
+                var words = message.replace(/ /g, " </span><span>");
+            }
             $("#port").html('<span>'+words+'</span>').show();
             var alerts = $("#port span").animate({ opacity: 0 }, 0);
             this.currentWord = 0;
@@ -262,6 +266,13 @@ $(document).ready(function() {
     $('#recogDenied').click(function() {
         stateMachine.goTo('approached');
         return false;
+    });
+
+    /*
+     * Speech commands TODO
+     */
+    face.on('speechCommand', function(data) {
+        console.log('speechCommand', JSON.stringify(data));
     });
 
     // debug page

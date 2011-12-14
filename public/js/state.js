@@ -22,15 +22,17 @@ var states = {
         init: function(content) {
             states['speechRecog'].tries += 1; 
             var left = $(window).width()/2 - 475;
-            $('#popup').find('#content').text(content);
+            $('#popup').find('.speechRecog #content').text(content);
+            $('#popup .speechRecog').show();
             $('#popup').css({
-                left: left,
-                top: top
+                left: left
             }).fadeIn(300);  
             commands['apply'].call(this, 'query');
         },
         leaveState: function() {
             $('#popup').fadeOut(200);
+            $('#popup .speechRecog').hide();
+            $('#popup .floorConfirm').hide();
         },
         tries: 0,
         to: ['moving', 'approached', 'promptOptions'],
@@ -66,6 +68,15 @@ var states = {
     'lift': {
         init: function() {
             // lift music!
+            talking.talk('<img src="/img/music.png"/><img src="/img/music.png"/><img src="/img/music.png"/><img src="/img/music.png"/><img src="/img/music.png"/><img src="/img/music.png"/><img src="/img/music.png"/><img src="/img/music.png"/>', function() {
+                $('#popup').find('.floorConfirm #floor').text(stateMachine.goal);            
+                $('#popup .floorConfirm').show();
+                var left = $(window).width()/2 - 475;
+                $('#popup').css({
+                    left: left
+                }).fadeIn(300);  
+                commands['apply'].call(this, 'query');
+            }, true);
         },
         to: ['moving'],
         from: ['moving']
@@ -102,7 +113,8 @@ var stateMachine = {
             this.current = state;
             states[state].init(data);
         }
-    }
+    },
+    goal: ''
 }
 
 /*

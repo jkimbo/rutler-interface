@@ -48,8 +48,14 @@
         input(type="text", id="text")
 
 #popup
-  h3 I heard: 
-    span#content
-  h3 Was that correct?
-  input(type="button", id="recogConfirm", value="Yes")
-  input(type="button", id="recogDenied", value="No")
+  .speechRecog
+    h3 I heard: 
+      span#content
+    h3 Was that correct?
+    input(type="button", id="recogConfirm", value="Yes")
+    input(type="button", id="recogDenied", value="No")
+  .floorConfirm
+    h3 Are we on level
+      span#floor
+      yet?
+    input(type="button", id="floorConfirm", value="Yes")
