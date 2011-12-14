@@ -146,7 +146,7 @@ function sendStart(dest) {
 
 $(document).ready(function() {
     // initialisation 
-    mouth.element = $('.mouth');
+    mouth.element = $('#mouth');
     eye.left = $('.eyeContainer#left');
     eye.right = $('.eyeContainer#right');
     eyebrow.left = $('.eyeBrow#left');
@@ -230,12 +230,6 @@ $(document).ready(function() {
             t_on = true;
             sendStart(201);
         }
-        return false;
-    });
-
-    // Left move
-    $('#leftmove').click(function() {
-        socket.emit('moveto', { message: true });
         return false;
     });
 

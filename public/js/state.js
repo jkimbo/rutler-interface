@@ -1,17 +1,26 @@
 var states = {
     'looking': {
         init: function() {
+            console.log('looking');
             $('#container').scrollTo($('#talkingBox'), 600);
+            commands['look'].apply();
         },
         to: ['approached'],
         from: ['approached']
     },
     'approached': {
         init: function() {
-            $('#container').scrollTo($('#prompt'), 600);
+            commands['approach'].apply();
         },
         to: ['confirmLocation', 'promptOptions'],
         from: ['looking']
+    },
+    'promptOptions': {
+        init: function() {
+            $('#container').scrollTo($('#prompt'), 600);
+        },
+        to: [],
+        from: ['approached']
     }
 }
 

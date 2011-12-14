@@ -28,28 +28,40 @@ h3 {
 .eyeBrow {
     position: absolute;
     height: 0px;
-    border: 1px solid black;
-    width: 200px;
+    width: 340px;
+    margin-bottom: 40px;
+    top: 50px;
+    border: 2px solid black;
+    background: black;
     &#left {
         left: 80px;
     }
     &#right {
         right: 80px;
+    }
+    &.up {
+        top: -15px;
     }
 }
 
 .eyeContainer {
     position: absolute;
 	border: 2px solid black;
-	width: 260px;
-	height: 260px;
+	width: 340px;
+	height: 340px;
 	border-radius: 200px;
-    top: 50px;
+    top: 120px;
+    background: none;
     &#left {
         left: 80px;
     }
     &#right {
         right: 80px;
+    }
+    &.close {
+        height: 1px;
+        top: 230px;
+        background: black;
     }
 }
 
@@ -61,21 +73,68 @@ h3 {
 	border-radius: 60px;
 	float: left;
 	position: absolute;
-    display: none;
+    /*display: none;*/
 }
 
-.mouth {
-    border: 1px solid #000;
+#mouth {
+    border: 2px solid #000;
     height: 0px;
-    width: 200px;
+    width: 400px;
     -webkit-border-bottom-right-radius: 500px;
     -webkit-border-bottom-left-radius: 500px;
     -moz-border-radius-bottomright: 500px;
     -moz-border-radius-bottomleft: 500px;
     border-bottom-right-radius: 500px;
     border-bottom-left-radius: 500px;
-    left: 295px;
+    bottom: 10px;
+    left: 300px;
+    background: white;
     position: absolute;
+    &.look {
+        width: 400px;
+    }
+    &.small {
+        width: 80px;
+        height: 1px;
+        background: black;
+    }
+    &.smile {
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+        border-bottom-right-radius: 500px;
+        border-bottom-left-radius: 500px;
+        border-top: none;
+        height: 180px;
+        bottom: -60px;
+    }
+    &.open {
+        border-radius: 200px;
+        height: 150px;
+        width: 150px;
+        left: 405px;
+        bottom: -20px;
+    }
+    &.smileopen {
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+        border-bottom-right-radius: 160px;
+        border-bottom-left-radius: 160px;
+        border: 2px solid black;
+        height: 180px;
+        bottom: -60px;
+    }
+    &.sad {
+        border-top-right-radius: 70px;
+        border-top-left-radius: 70px;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-bottom: none;
+        width: 150px;
+        height: 20px;
+        left: 405px;
+    }
+    &.dizzy {
+    }
 }
 
 #debugCanvas{
@@ -238,8 +297,9 @@ ul#messagelist {
 }
 
 #container {
-    width: 900px;
+    width: 980px;
     height: 400px;
+    margin: 0 auto;
     overflow: hidden;
     .slides {
         width: 3000px;
