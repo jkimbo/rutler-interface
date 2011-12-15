@@ -289,6 +289,11 @@ $(document).ready(function() {
         stateMachine.goTo('moving');
     });
 
+    $('#options').click(function() {
+        stateMachine.goTo('promptOptions');
+        return false;
+    });
+
     // debug page
     if($('.debugMessage').length) {
         var list = $('.debugMessage ul');

@@ -11,6 +11,7 @@ var states = {
     'approached': {
         init: function() {
             commands['apply'].call(this, 'approach');
+            $('#options').fadeIn(400);
             if(states['speechRecog'].tries >= 3) {
                 stateMachine.goTo('displayLocationInput');
             }
