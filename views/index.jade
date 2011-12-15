@@ -5,7 +5,7 @@
     .eyeBall(id='eyeBall_1')
   .eyeContainer(rel='2', id='right')
     .eyeBall(id='eyeBall_2')
-  #mouth
+  .mouth
 #container
   .slides.clearfix
     .slide
@@ -13,33 +13,33 @@
         #port
         #bowtie
           img(src='/img/bowtie.jpg')
-        a(href="#", id="options") Options
+        a(href="#", id="start") Start
     .slide
       #prompt
         .options
           ul
             li
-              a(href="#", data-state='displayLocationInput') Find a person or room
+              a(href="#") Find a person or room
             li
-              a(href="#", data-state='displayImperialNews') Show me Imperial news and events
+              a(href="#") Show me Imperial news and events
+            li
+              a(href="#") Tell me a joke
         #display
-          .locationSubmit
-            h3 Find a person or a room
-            form#submitLocation
-              input(type="text", id="personfinder", placeholder="Type in a name or room number")
-          .imperialNews
+          h3 Find a person or a room
+          form#go
+            input(type="text", id="personfinder", placeholder="Type in a name or room number")
       #hand
         img(src='/img/hand-left.png')
-
-#popup
-  .speechRecog
-    h3 I heard: 
-      span#content
-    h3 Was that correct?
-    input(type="button", id="recogConfirm", value="Yes")
-    input(type="button", id="recogDenied", value="No")
-  .floorConfirm
-    h3 Are we on level
-      span#floor
-      yet?
-    input(type="button", id="floorConfirm", value="Yes")
+#faces
+  ul
+#commands
+  ul
+    li
+      a(href="#", id="approached") approached
+    li
+      a(href="#", id="message") welcome message
+    li
+      a(href="#", id="another_message") another message
+    li
+      form#submitmessage
+        input(type="hidden", id="text")

@@ -19,11 +19,8 @@ h3 {
 .eyeBrow {
   position: absolute;
   height: 0px;
-  width: 340px;
-  margin-bottom: 40px;
-  top: 50px;
-  border: 2px solid black;
-  background: black;
+  border: 1px solid black;
+  width: 200px;
 }
 .eyeBrow#left {
   left: 80px;
@@ -31,28 +28,19 @@ h3 {
 .eyeBrow#right {
   right: 80px;
 }
-.eyeBrow.up {
-  top: -15px;
-}
 .eyeContainer {
   position: absolute;
   border: 2px solid black;
-  width: 340px;
-  height: 340px;
+  width: 260px;
+  height: 260px;
   border-radius: 200px;
-  top: 120px;
-  background: none;
+  top: 50px;
 }
 .eyeContainer#left {
   left: 80px;
 }
 .eyeContainer#right {
   right: 80px;
-}
-.eyeContainer.close {
-  height: 1px;
-  top: 230px;
-  background: black;
 }
 .eyeBall {
   border: 1px solid black;
@@ -62,66 +50,20 @@ h3 {
   border-radius: 60px;
   float: left;
   position: absolute;
-  /*display: none;*/
-
+  display: none;
 }
-#mouth {
-  border: 2px solid #000;
+.mouth {
+  border: 1px solid #000;
   height: 0px;
-  width: 400px;
+  width: 200px;
   -webkit-border-bottom-right-radius: 500px;
   -webkit-border-bottom-left-radius: 500px;
   -moz-border-radius-bottomright: 500px;
   -moz-border-radius-bottomleft: 500px;
   border-bottom-right-radius: 500px;
   border-bottom-left-radius: 500px;
-  bottom: 10px;
-  left: 300px;
-  background: white;
+  left: 295px;
   position: absolute;
-}
-#mouth.look {
-  width: 400px;
-}
-#mouth.small {
-  width: 80px;
-  height: 1px;
-  background: black;
-}
-#mouth.smile {
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
-  border-bottom-right-radius: 500px;
-  border-bottom-left-radius: 500px;
-  border-top: none;
-  height: 180px;
-  bottom: -60px;
-}
-#mouth.open {
-  border-radius: 200px;
-  height: 150px;
-  width: 150px;
-  left: 405px;
-  bottom: -20px;
-}
-#mouth.smileopen {
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
-  border-bottom-right-radius: 160px;
-  border-bottom-left-radius: 160px;
-  border: 2px solid black;
-  height: 180px;
-  bottom: -60px;
-}
-#mouth.sad {
-  border-top-right-radius: 70px;
-  border-top-left-radius: 70px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
-  border-bottom: none;
-  width: 150px;
-  height: 20px;
-  left: 405px;
 }
 #debugCanvas {
   width: 100%;
@@ -270,9 +212,8 @@ ul#messagelist li.error {
   background: url('../img/round_plus_icon&48-black.png') 0 0 no-repeat;
 }
 #container {
-  width: 980px;
+  width: 900px;
   height: 400px;
-  margin: 0 auto;
   overflow: hidden;
 }
 #container .slides {
@@ -284,10 +225,10 @@ ul#messagelist li.error {
   display: block;
   margin-right: 50px;
 }
-#display .locationSubmit {
+#display {
   display: none;
 }
-#display .locationSubmit #personfinder {
+#display #personfinder {
   width: 800px;
   height: 50px;
   padding: 5px;
@@ -302,60 +243,6 @@ ul#messagelist li.error {
 #hand img {
   width: 150px;
 }
-#options {
-  position: absolute;
-  right: 10px;
-  top: 200px;
-  font-size: 40px;
-  color: #444;
-  text-decoration: none;
-  display: none;
-}
-.ui-autocomplete {
-  font-size: 25px;
-  border: 1px solid #030;
-  width: 800px;
-  padding: 0;
-}
-.ui-menu-item {
-  padding: 10px;
-  border: 1px solid #030;
-  list-style: none;
-  margin: -1px;
-}
-.ui-menu-item:hover {
-  background-color: #EDFFD2;
-}
-#popup {
-  display: none;
-  position: absolute;
-  width: 850px;
-  height: 260px;
-  background: white;
-  border: 1px solid #BEBEBE;
-  padding: 50px;
-  bottom: 10px;
-}
-#popup h3 {
-  margin: 0px;
-  margin-bottom: 10px;
-}
-#popup input {
-  width: 400px;
-  margin-right: 50px;
-  margin-top: 20px;
-  height: 100px;
-  font-size: 40px;
-}
-#popup input#recogDenied {
-  margin-right: 0px;
-}
-#popup .speechRecog {
-  display: none;
-}
-#popup .floorConfirm {
-  display: none;
-}
 /* Contain floats: h5bp.com/q */
 .clearfix:before, .clearfix:after {
   content: "";
@@ -366,4 +253,20 @@ ul#messagelist li.error {
 }
 .clearfix {
   *zoom: 1;
+}
+.ui-autocomplete {
+	font-size: 25px;
+	border: 1px solid #030;	
+	width: 800px;
+	padding: 0;
+}
+.ui-menu-item {
+	padding: 10px;
+	border: 1px solid #030;
+
+	list-style: none;
+	margin: -1px;
+}
+.ui-menu-item:hover {
+	background-color: #EDFFD2;	
 }

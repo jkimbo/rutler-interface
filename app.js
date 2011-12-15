@@ -35,7 +35,6 @@ app.configure('production', function(){
 
 app.get('/', routes.index);
 app.get('/debug', routes.debug);
-app.get('/control', routes.control);
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
@@ -45,7 +44,7 @@ process.stdin.setEncoding('utf8');
 
 io.sockets.on('connection', function(socket) {
     socket.on('approach_trigger', function(data) {
-        io.sockets.emit('approached', { message: 'none' });
+        socket.emit('approached', { message: 'none' });
     });
 
     socket.on('welcome_trigger', function(data) {
@@ -66,11 +65,10 @@ io.sockets.on('connection', function(socket) {
 
     socket.on('moveto', function(data) {
         process.stdout.write('{ "action": "move", "value": "'+data.message+'" }'+"\n");
-        io.sockets.emit('moving', { message: true });
     });
 
     socket.on('start', function(data) {
-        process.stdout.write('{ "action": "start", "value": "'+data.message+'" }'+"\n");
+	process.stdout.write('{ "action": "start", "value": "602" }'+"\n");
     });
 });
 
@@ -78,14 +76,18 @@ var face = io.of('/face').on('connection', function(socket) {
 });
 
 process.stdin.on('data', function (chunk) {
-    try {
-        var input = JSON.parse(chunk);
-        for(var j in input) {
-            face.emit(j, { command: input[j] });
+    //var splitResult = chunk.split(",");
+    //console.log(splitResult);
+    //for(i = 0; i < splitResult.length; i++) {
+        try {
+            var input = JSON.parse(chunk);
+            for(var j in input) {
+                face.emit(j, { command: input[j] });
+            }
+        } catch (err) {
+            console.log('error',err);
+            io.sockets.emit('message', { message: chunk });
         }
-    } catch (err) {
-        console.log('error',err);
-        io.sockets.emit('message', { message: chunk });
-    }
+    //}
 });
 

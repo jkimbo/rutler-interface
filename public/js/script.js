@@ -12,32 +12,24 @@ socket.on('message', function(data) {
 var talking = {
     isTalking: false, // currently talking
     messages: [], // queue of messages to be said
-    talk : function(message, callback, html) {
-        if(talking.isTalking) { // if rutler is currently talking then queue up the message
-            talking.messages.push(message);
-        } else { // else just say it
-            $('#bowtie').fadeTo(100, 0.1);
-            this.isTalking = true; // set rutler as talking
-            if(html) {
-                var words = message.replace(/\/></g, "/></span><span><");
+    talk : function(message, callback) {
+        $('#bowtie').fadeTo(100, 0.1);
+        this.isTalking = true; // set rutler as talking
+        var words = message.replace(/ /g, " </span><span>");
+        $("#port").html('<span>'+words+'</span>').show();
+        var alerts = $("#port span").animate({ opacity: 0 }, 0);
+        this.currentWord = 0;
+        this.showWords(alerts, function() {
+            if(talking.messages.length) {
+                var timeout = setTimeout(function() {
+                    talking.talk(talking.messages[0]);
+                    talking.messages.splice(0,1); // remove element from array
+                }, 400);
             } else {
-                var words = message.replace(/ /g, " </span><span>");
+                talking.isTalking = false;
+                callback();
             }
-            $("#port").html('<span>'+words+'</span>').show();
-            var alerts = $("#port span").animate({ opacity: 0 }, 0);
-            this.currentWord = 0;
-            this.showWords(alerts, function() {
-                if(talking.messages.length) {
-                    var timeout = setTimeout(function() {
-                        talking.talk(talking.messages[0]);
-                        talking.messages.splice(0,1); // remove element from array
-                    }, 400);
-                } else {
-                    talking.isTalking = false;
-                    callback();
-                }
-            });
-        }
+        });
     },
     showWords: function(words, callback) {
         if(words.eq(talking.currentWord).length) {
@@ -73,7 +65,19 @@ socket.on('narrate', function(data) {
 }); 
 
 socket.on('approached', function(data) {
-    stateMachine.goTo('approached');
+    //$("#box").show();
+	//$("#port").addClass("port_search");
+    //commands['acknowledge'].call();
+    //hand.element.show();
+    //$('#prompt .options li a').each(function(index) {
+        //if(hand.isMoving) {
+            //hand.points.push(this);
+        //} else {
+            //hand.point(this);
+        //}
+    //});
+    console.log(data);
+    $('#container').scrollTo($('#prompt'), 600);
 }); 
 
 var hand = {
@@ -98,6 +102,13 @@ var hand = {
     }
 };
 
+var box = {
+    element: $('#box'),
+    show: function() {
+        this.element.show();
+    }
+}
+
 face.on('face', function(data) {
     console.log(JSON.stringify(data));
     if(data.command) {
@@ -120,7 +131,6 @@ face.on('status', function(data) {
     console.log(JSON.stringify(data));
 });
 
-
 var deg = -90;
 var t;
 
@@ -134,21 +144,25 @@ var timer;
 var t_on = false;
 var count = 1;
 
-function sendStart(dest) {
+function sendStart() {
     if(count <= 3) {
-        socket.emit('start', { message: dest });
-        timer = setTimeout('sendStart('+dest+')', 500);
-        count++;
+	socket.emit('start', { message: true });
+	timer = setTimeout('sendStart()', 500);
+	count++;
     } else {
-    	clearTimeout(timer);
-    	t_on = false;
-        count = 1;
+	clearTimeout(timer);
+	t_on = false;
     }
+}
+
+function isNumeric(input){
+    var RE = /^-{0,1}\d*\d+$/;
+    return (RE.test(input));
 }
 
 $(document).ready(function() {
     // initialisation 
-    mouth.element = $('#mouth');
+    mouth.element = $('.mouth');
     eye.left = $('.eyeContainer#left');
     eye.right = $('.eyeContainer#right');
     eyebrow.left = $('.eyeBrow#left');
@@ -159,16 +173,26 @@ $(document).ready(function() {
     increment();
 
     /*
-     * Initialise state machine
-     */
-    stateMachine.init('looking');
-    
-    /*
      * jQuery UI Autocomplete
      */
     $("input#personfinder").autocomplete({
-        source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
+        source: eee
     });
+	
+	$("#text").val("x");
+	
+	$("#go").submit(function(){
+		var x = $("#personfinder").val();
+		
+		if (isNumeric(x)) { $("#text").val([x]); }
+		else 			  { $("#text").val(eee2[x]); }
+		
+		$('#submitmessage').submit();
+	});
+	//for (x in eee) {
+	//	document.write("\"" + x + "\", \"" + eee[x] + "\", ");
+	//}
+	
 
     //alert($(window).width());
     // Create command list 
@@ -179,7 +203,8 @@ $(document).ready(function() {
 
     $('#faces a').on('click', function() {
         var command = $(this).data('command'); 
-        commands['apply'].call(this, command);
+        commands['reset'].call();
+        commands[command].call();
         return false;
     });
 
@@ -200,97 +225,54 @@ $(document).ready(function() {
         return false;
     });
 
-    $('#prompt_options').click(function() {
-        stateMachine.goTo('promptOptions');
-        return false;
-    });
-
     // submit any message
     $('#submitmessage').submit(function() {
         var value = $(this).find('#text').val();
+        //socket.emit('send_message', {message: value});
+        //socket.emit('output', {message: value});
         socket.emit('moveto', { message: value });
         $(this).find('#text').val('');
         return false;
     });
 
-    $('#submitLocation').submit(function() {
-        var value = $(this).find('#personfinder').val();
-        $(this).find('#personfinder').val('');
-        stateMachine.goTo('sendLocation', value);
-        return false;
-    });
 
-    /*
-     * Set initial position
-     */
     $('#start').click(function() {
-        if(!t_on) {
-            t_on = true;
-            sendStart(600);
-        }
-        return false;
+	if(!t_on) {
+	    t_on = true;
+	    sendStart();
+	}
+	return false;
     });
 
-    $('#start2').click(function() {
-        if(!t_on) {
-            t_on = true;
-            sendStart(201);
-        }
+    // Left move
+    $('#leftmove').click(function() {
+        socket.emit('moveto', { message: true });
         return false;
     });
 
     // options
     $('#prompt .options a').click(function() {
-        var state = $(this).data('state'); 
-        stateMachine.goTo(state);
+        //box.show();
         /* expand box */
         // hide options
-        return false;
-    });
-
-    /*
-     * Speech regonition
-     */
-    face.on('recog', function(data) {
-        console.log(JSON.stringify(data));
-        stateMachine.goTo('speechRecog', data.command);
-    });
-
-    $('#recogConfirm').click(function() {
-        stateMachine.goTo('moving');
-        return false;
-    });
-
-    $('#recogDenied').click(function() {
-        stateMachine.goTo('approached');
-        return false;
-    });
-
-    /*
-     * Speech commands TODO
-     */
-    face.on('speechCommand', function(data) {
-        console.log('speechCommand', JSON.stringify(data));
-    });
-
-    /*
-     * Floor confirmation
-     */
-    $('#floorConfirm').click(function() {
-        if(!t_on) {
-            t_on = true;
-            sendStart(600);
-        }
-        stateMachine.goTo('moving');
-        return false;
-    });
-
-    face.on('moving', function(data) {
-        stateMachine.goTo('moving');
-    });
-
-    $('#options').click(function() {
-        stateMachine.goTo('promptOptions');
+        $(this).parent().parent().fadeOut(200, function() {
+            $('#container').css({
+                position: 'absolute',
+                top: '0px',
+                height: '1000px'
+            });
+            $('#prompt').css({
+                position: 'absolute',
+                bottom: '60px',
+                width: '900px'
+            })
+            .animate({
+                height: '800px'
+                //top: '10px'
+            }, 1000, function() {
+                $('#display').fadeIn(300);
+            });
+        });
         return false;
     });
 
@@ -317,7 +299,7 @@ $(document).ready(function() {
             );
             toBottom();
         });
-        face.on('status', function(data) {
+	face.on('status', function(data) {
             list.append(
                 $('<li>')
                 .text(JSON.stringify(data))
@@ -327,7 +309,7 @@ $(document).ready(function() {
                 )
             );
             toBottom();
-        });
+	});
         socket.on('message', function(data) {
             list.append(
                 $('<li>')

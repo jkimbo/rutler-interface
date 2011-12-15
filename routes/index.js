@@ -9,7 +9,3 @@ exports.index = function(req, res){
 exports.debug = function(req, res){
   res.render('debug', { title: 'Debug Rutler' })
 };
-
-exports.control = function(req, res){
-  res.render('control', { title: 'Control Rutler' })
-};
